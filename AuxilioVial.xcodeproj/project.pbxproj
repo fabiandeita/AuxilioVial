@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202541FF04BCF00A96668 /* AppDelegate.swift */; };
-		1C8202571FF04BCF00A96668 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202561FF04BCF00A96668 /* ViewController.swift */; };
+		1C8202571FF04BCF00A96668 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202561FF04BCF00A96668 /* LoginVC.swift */; };
 		1C82025A1FF04BCF00A96668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C8202581FF04BCF00A96668 /* Main.storyboard */; };
 		1C82025C1FF04BCF00A96668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025B1FF04BCF00A96668 /* Assets.xcassets */; };
 		1C82025F1FF04BCF00A96668 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */; };
+		1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202672002EFB700A96668 /* TableroControlVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C8202511FF04BCF00A96668 /* AuxilioVial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuxilioVial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C8202541FF04BCF00A96668 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1C8202561FF04BCF00A96668 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1C8202561FF04BCF00A96668 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		1C8202591FF04BCF00A96668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1C82025B1FF04BCF00A96668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C82025E1FF04BCF00A96668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C8202601FF04BCF00A96668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C8202672002EFB700A96668 /* TableroControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableroControlVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		1C8202531FF04BCF00A96668 /* AuxilioVial */ = {
 			isa = PBXGroup;
 			children = (
+				1C8202662002ED3700A96668 /* ViewController */,
 				1C8202541FF04BCF00A96668 /* AppDelegate.swift */,
-				1C8202561FF04BCF00A96668 /* ViewController.swift */,
 				1C8202581FF04BCF00A96668 /* Main.storyboard */,
 				1C82025B1FF04BCF00A96668 /* Assets.xcassets */,
 				1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */,
 				1C8202601FF04BCF00A96668 /* Info.plist */,
 			);
 			path = AuxilioVial;
+			sourceTree = "<group>";
+		};
+		1C8202662002ED3700A96668 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C8202561FF04BCF00A96668 /* LoginVC.swift */,
+				1C8202672002EFB700A96668 /* TableroControlVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C8202571FF04BCF00A96668 /* ViewController.swift in Sources */,
+				1C8202571FF04BCF00A96668 /* LoginVC.swift in Sources */,
+				1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */,
 				1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
