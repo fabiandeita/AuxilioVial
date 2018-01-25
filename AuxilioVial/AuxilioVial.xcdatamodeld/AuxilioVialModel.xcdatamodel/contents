@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Carretera" representedClassName=".Carretera" syncable="YES">
+        <attribute name="destino" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idCarretera" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idEntidadFederativa" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="origen" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Clase" representedClassName=".Clase" syncable="YES">
+        <attribute name="idClase" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Cuerpo" representedClassName=".Cuerpo" syncable="YES">
+        <attribute name="idCuerpo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="EntidadFederativa" representedClassName=".EntidadFederativa" syncable="YES">
+        <attribute name="idEntidadFederativa" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Lado" representedClassName=".Lado" syncable="YES">
+        <attribute name="idLado" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OrigenVisible" representedClassName=".OrigenVisible" syncable="YES">
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orienVisib" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="SubTipo" representedClassName=".SubTipo" syncable="YES">
+        <attribute name="clase" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idSubtipo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Tipo" representedClassName=".Tipo" syncable="YES">
+        <attribute name="clase" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idTipo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TipoEsp" representedClassName=".TipoEsp" syncable="YES">
+        <attribute name="idtipoEsp" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nombre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tipo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Tramo" representedClassName=".Tramo" syncable="YES">
+        <attribute name="destino" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idCarretera" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idTramo" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="origen" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Carretera" syncable="YES"/>
+        <fetchedProperty name="carretera" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Tramo"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="Carretera" positionX="-378" positionY="11" width="128" height="105"/>
+        <element name="Clase" positionX="-657" positionY="189" width="128" height="75"/>
+        <element name="Cuerpo" positionX="52" positionY="18" width="128" height="75"/>
+        <element name="EntidadFederativa" positionX="-128" positionY="18" width="155" height="75"/>
+        <element name="Lado" positionX="27" positionY="240" width="128" height="75"/>
+        <element name="OrigenVisible" positionX="-243" positionY="279" width="128" height="75"/>
+        <element name="SubTipo" positionX="-468" positionY="171" width="128" height="90"/>
+        <element name="Tipo" positionX="-144" positionY="180" width="128" height="90"/>
+        <element name="TipoEsp" positionX="18" positionY="135" width="128" height="90"/>
+        <element name="Tramo" positionX="-648" positionY="4" width="128" height="149"/>
+    </elements>
+</model>

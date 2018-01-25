@@ -8,11 +8,17 @@
 
 import UIKit
 
-class TableroControlVC: UIViewController {
-
+class TableroControlVC: UITabBarController {
+    var json: [String:Any]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //Valores recibidos desde el Logeo
+        /*let estatus = json!["estatus"] as! Int
+        let acces = json!["acces"] as! Bool
+        let idEntidad = json!["idEntidad"] as! Int
+        print("estatus: \(estatus)")*/
         // Do any additional setup after loading the view.
     }
 

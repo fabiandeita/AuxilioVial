@@ -7,23 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C166AE4200C4A1A000AD883 /* AuxilioVial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C166AE2200C4A1A000AD883 /* AuxilioVial.xcdatamodeld */; };
+		1C616258200B1D960087A859 /* Sincronizador.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C616257200B1D960087A859 /* Sincronizador.swift */; };
+		1C61625B200B1EE20087A859 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C61625A200B1EE20087A859 /* Strings.swift */; };
 		1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202541FF04BCF00A96668 /* AppDelegate.swift */; };
 		1C8202571FF04BCF00A96668 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202561FF04BCF00A96668 /* LoginVC.swift */; };
 		1C82025A1FF04BCF00A96668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C8202581FF04BCF00A96668 /* Main.storyboard */; };
 		1C82025C1FF04BCF00A96668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025B1FF04BCF00A96668 /* Assets.xcassets */; };
 		1C82025F1FF04BCF00A96668 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */; };
 		1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202672002EFB700A96668 /* TableroControlVC.swift */; };
+		1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CB9A200F10980072EA1B /* EntidadFederativa.swift */; };
+		1CE6CB9D200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CB9B200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift */; };
+		1CE6CBC3201013220072EA1B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBC2201013220072EA1B /* Alert.swift */; };
+		1CE6CBC6201070330072EA1B /* Carretera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBC4201070330072EA1B /* Carretera.swift */; };
+		1CE6CBC7201070330072EA1B /* Carretera+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBC5201070330072EA1B /* Carretera+CoreDataProperties.swift */; };
+		1CE6CBC92012A90D0072EA1B /* RegistroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBC82012A90D0072EA1B /* RegistroVC.swift */; };
+		1CE6CBCC2012F5320072EA1B /* Tramo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBCA2012F5320072EA1B /* Tramo.swift */; };
+		1CE6CBCD2012F5320072EA1B /* Tramo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBCB2012F5320072EA1B /* Tramo+CoreDataProperties.swift */; };
+		1CE6CBDC2012F7840072EA1B /* OrigenVisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBCE2012F7840072EA1B /* OrigenVisible.swift */; };
+		1CE6CBDD2012F7840072EA1B /* OrigenVisible+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBCF2012F7840072EA1B /* OrigenVisible+CoreDataProperties.swift */; };
+		1CE6CBDE2012F7840072EA1B /* Lado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD02012F7840072EA1B /* Lado.swift */; };
+		1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */; };
+		1CE6CBE02012F7840072EA1B /* Clase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD22012F7840072EA1B /* Clase.swift */; };
+		1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */; };
+		1CE6CBE22012F7840072EA1B /* TipoEsp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD42012F7840072EA1B /* TipoEsp.swift */; };
+		1CE6CBE32012F7840072EA1B /* TipoEsp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */; };
+		1CE6CBE42012F7840072EA1B /* Cuerpo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD62012F7840072EA1B /* Cuerpo.swift */; };
+		1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */; };
+		1CE6CBE62012F7840072EA1B /* Tipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD82012F7840072EA1B /* Tipo.swift */; };
+		1CE6CBE72012F7840072EA1B /* Tipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */; };
+		1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDA2012F7840072EA1B /* SubTipo.swift */; };
+		1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C166AE3200C4A1A000AD883 /* AuxilioVialModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AuxilioVialModel.xcdatamodel; sourceTree = "<group>"; };
+		1C616257200B1D960087A859 /* Sincronizador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sincronizador.swift; sourceTree = "<group>"; };
+		1C61625A200B1EE20087A859 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		1C8202511FF04BCF00A96668 /* AuxilioVial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuxilioVial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C8202541FF04BCF00A96668 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1C8202561FF04BCF00A96668 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		1C8202561FF04BCF00A96668 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		1C8202591FF04BCF00A96668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1C82025B1FF04BCF00A96668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C82025E1FF04BCF00A96668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C8202601FF04BCF00A96668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C8202672002EFB700A96668 /* TableroControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableroControlVC.swift; sourceTree = "<group>"; };
+		1CE6CB9A200F10980072EA1B /* EntidadFederativa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntidadFederativa.swift; sourceTree = "<group>"; };
+		1CE6CB9B200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EntidadFederativa+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CB9F200FC8690072EA1B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1CE6CBC2201013220072EA1B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1CE6CBC4201070330072EA1B /* Carretera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carretera.swift; sourceTree = "<group>"; };
+		1CE6CBC5201070330072EA1B /* Carretera+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Carretera+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBC82012A90D0072EA1B /* RegistroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroVC.swift; sourceTree = "<group>"; };
+		1CE6CBCA2012F5320072EA1B /* Tramo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tramo.swift; sourceTree = "<group>"; };
+		1CE6CBCB2012F5320072EA1B /* Tramo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tramo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBCE2012F7840072EA1B /* OrigenVisible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrigenVisible.swift; sourceTree = "<group>"; };
+		1CE6CBCF2012F7840072EA1B /* OrigenVisible+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrigenVisible+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBD02012F7840072EA1B /* Lado.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lado.swift; path = AuxilioVial/Model/Lado.swift; sourceTree = "<group>"; };
+		1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Lado+CoreDataProperties.swift"; path = "AuxilioVial/Model/Lado+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBD22012F7840072EA1B /* Clase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clase.swift; path = AuxilioVial/Model/Clase.swift; sourceTree = "<group>"; };
+		1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Clase+CoreDataProperties.swift"; path = "AuxilioVial/Model/Clase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBD42012F7840072EA1B /* TipoEsp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoEsp.swift; path = AuxilioVial/Model/TipoEsp.swift; sourceTree = "<group>"; };
+		1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TipoEsp+CoreDataProperties.swift"; path = "AuxilioVial/Model/TipoEsp+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBD62012F7840072EA1B /* Cuerpo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cuerpo.swift; path = AuxilioVial/Model/Cuerpo.swift; sourceTree = "<group>"; };
+		1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Cuerpo+CoreDataProperties.swift"; path = "AuxilioVial/Model/Cuerpo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBD82012F7840072EA1B /* Tipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tipo.swift; path = AuxilioVial/Model/Tipo.swift; sourceTree = "<group>"; };
+		1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Tipo+CoreDataProperties.swift"; path = "AuxilioVial/Model/Tipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1CE6CBDA2012F7840072EA1B /* SubTipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubTipo.swift; path = AuxilioVial/Model/SubTipo.swift; sourceTree = "<group>"; };
+		1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SubTipo+CoreDataProperties.swift"; path = "AuxilioVial/Model/SubTipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,11 +88,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C616255200B1CB60087A859 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1CE6CBCF2012F7840072EA1B /* OrigenVisible+CoreDataProperties.swift */,
+				1CE6CBCE2012F7840072EA1B /* OrigenVisible.swift */,
+				1CE6CBCA2012F5320072EA1B /* Tramo.swift */,
+				1CE6CBCB2012F5320072EA1B /* Tramo+CoreDataProperties.swift */,
+				1CE6CBC4201070330072EA1B /* Carretera.swift */,
+				1CE6CBC5201070330072EA1B /* Carretera+CoreDataProperties.swift */,
+				1CE6CB9B200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift */,
+				1CE6CB9A200F10980072EA1B /* EntidadFederativa.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1C616256200B1D1B0087A859 /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				1C616257200B1D960087A859 /* Sincronizador.swift */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		1C616259200B1EA20087A859 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				1C61625A200B1EE20087A859 /* Strings.swift */,
+				1CE6CBC2201013220072EA1B /* Alert.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		1C8202481FF04BCF00A96668 = {
 			isa = PBXGroup;
 			children = (
+				1CE6CBD02012F7840072EA1B /* Lado.swift */,
+				1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */,
+				1CE6CBD22012F7840072EA1B /* Clase.swift */,
+				1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */,
+				1CE6CBD42012F7840072EA1B /* TipoEsp.swift */,
+				1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */,
+				1CE6CBD62012F7840072EA1B /* Cuerpo.swift */,
+				1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */,
+				1CE6CBD82012F7840072EA1B /* Tipo.swift */,
+				1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */,
+				1CE6CBDA2012F7840072EA1B /* SubTipo.swift */,
+				1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */,
 				1C8202531FF04BCF00A96668 /* AuxilioVial */,
 				1C8202521FF04BCF00A96668 /* Products */,
+				1CE6CB9E200FC8690072EA1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +152,16 @@
 		1C8202531FF04BCF00A96668 /* AuxilioVial */ = {
 			isa = PBXGroup;
 			children = (
+				1C616259200B1EA20087A859 /* Util */,
+				1C616256200B1D1B0087A859 /* DataController */,
+				1C616255200B1CB60087A859 /* Model */,
 				1C8202662002ED3700A96668 /* ViewController */,
 				1C8202541FF04BCF00A96668 /* AppDelegate.swift */,
 				1C8202581FF04BCF00A96668 /* Main.storyboard */,
 				1C82025B1FF04BCF00A96668 /* Assets.xcassets */,
 				1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */,
 				1C8202601FF04BCF00A96668 /* Info.plist */,
+				1C166AE2200C4A1A000AD883 /* AuxilioVial.xcdatamodeld */,
 			);
 			path = AuxilioVial;
 			sourceTree = "<group>";
@@ -71,8 +171,17 @@
 			children = (
 				1C8202561FF04BCF00A96668 /* LoginVC.swift */,
 				1C8202672002EFB700A96668 /* TableroControlVC.swift */,
+				1CE6CBC82012A90D0072EA1B /* RegistroVC.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		1CE6CB9E200FC8690072EA1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CE6CB9F200FC8690072EA1B /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,6 +210,9 @@
 		1C8202491FF04BCF00A96668 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					sta,
+				);
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Iris Viridiana";
@@ -147,9 +259,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CE6CBE42012F7840072EA1B /* Cuerpo.swift in Sources */,
+				1CE6CBE72012F7840072EA1B /* Tipo+CoreDataProperties.swift in Sources */,
+				1CE6CBC3201013220072EA1B /* Alert.swift in Sources */,
+				1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */,
+				1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */,
+				1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */,
+				1CE6CBE32012F7840072EA1B /* TipoEsp+CoreDataProperties.swift in Sources */,
+				1CE6CBC7201070330072EA1B /* Carretera+CoreDataProperties.swift in Sources */,
+				1CE6CBCC2012F5320072EA1B /* Tramo.swift in Sources */,
 				1C8202571FF04BCF00A96668 /* LoginVC.swift in Sources */,
+				1CE6CBC92012A90D0072EA1B /* RegistroVC.swift in Sources */,
+				1CE6CBDC2012F7840072EA1B /* OrigenVisible.swift in Sources */,
+				1CE6CBCD2012F5320072EA1B /* Tramo+CoreDataProperties.swift in Sources */,
 				1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */,
+				1CE6CBE02012F7840072EA1B /* Clase.swift in Sources */,
+				1C61625B200B1EE20087A859 /* Strings.swift in Sources */,
+				1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */,
+				1C166AE4200C4A1A000AD883 /* AuxilioVial.xcdatamodeld in Sources */,
+				1CE6CB9D200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift in Sources */,
+				1CE6CBE62012F7840072EA1B /* Tipo.swift in Sources */,
 				1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */,
+				1C616258200B1D960087A859 /* Sincronizador.swift in Sources */,
+				1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */,
+				1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */,
+				1CE6CBDD2012F7840072EA1B /* OrigenVisible+CoreDataProperties.swift in Sources */,
+				1CE6CBC6201070330072EA1B /* Carretera.swift in Sources */,
+				1CE6CBE22012F7840072EA1B /* TipoEsp.swift in Sources */,
+				1CE6CBDE2012F7840072EA1B /* Lado.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +469,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1C166AE2200C4A1A000AD883 /* AuxilioVial.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1C166AE3200C4A1A000AD883 /* AuxilioVialModel.xcdatamodel */,
+			);
+			currentVersion = 1C166AE3200C4A1A000AD883 /* AuxilioVialModel.xcdatamodel */;
+			path = AuxilioVial.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1C8202491FF04BCF00A96668 /* Project object */;
 }
