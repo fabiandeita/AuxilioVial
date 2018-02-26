@@ -13,8 +13,8 @@ import CoreData
 
 extension Tipo {
 
-    @NSManaged var idTipo: Int16
+    @NSManaged var idTipo: NSNumber
     @NSManaged var nombre: String?
-    @NSManaged var clase: Int16
+    @NSManaged var clase: NSNumber
 
 }

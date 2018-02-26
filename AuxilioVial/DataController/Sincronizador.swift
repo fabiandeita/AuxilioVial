@@ -49,6 +49,9 @@ class Sincronizador {
         return true
     }
     
+    func getIdEntidadFederativa() -> Int{
+        return UserDefaults.standard.integer(forKey: "idEntidad")
+    }
     func loginLocal(correo usuario:String, password contrasena: String) -> Bool{
         /*print ( usuario )
         print ( contrasena )
@@ -84,22 +87,19 @@ class Sincronizador {
     func descargaCatalogos () -> Bool{
         //el metodo isCatalogoDescargado devuelve true o false, si ya existe en los defaults del usuario, el nombre de algun catalogo descargado. el siguiente IF se repite para cada catalogo, solo se cambia el tipo de entidad a sincronizar
         if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
-            //print ("Descargando catálogo EntidadFederativa")
-            //Servicio que descarga EntidadesFederativas
             descargaEntidadesFederativas()
         }
         
-        //Aqui le sigues Viri
-        if !isCatalogoDescargado(estaAlmacenado: "OrigenVisible"){
-            //descargaOrigenVisible()
+        if !isCatalogoDescargado(estaAlmacenado: "OrienVisib"){
+            descargaOrigenVisible()
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Lado"){
-            //descargaLado()
+            descargaLado()
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Clase"){
-            //descargaClase()
+            descargaClase()
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "TipoEsp"){
@@ -107,16 +107,17 @@ class Sincronizador {
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Cuerpo"){
-            //descargaCuerpo()
+            descargaCuerpo()
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Tipo"){
             //descargaTipo()
         }
         
-        if !isCatalogoDescargado(estaAlmacenado: "ESubTipo"){
-            //descargaSubTipo()
+        if !isCatalogoDescargado(estaAlmacenado: "SubTipo"){
+            //descargaSubTipos()
         }
+        
         
         
         
@@ -133,32 +134,337 @@ class Sincronizador {
         */
         //Continua la descarga de catalogos, revisar codigo fuente para desarga de catalogos por post y por get, ya que cambia el código
         
+        var localizacion:Localizacion?
+        localizacion = Localizacion()
         return false
     }
     
-    func isCatalogoDescargado(estaAlmacenado nombre: String) -> Bool{
-        if UserDefaults.standard.bool(forKey: nombre){
-            return true;
+    
+    func descargaSubTipos(_ clase:Clase){
+        let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_SUBTIPO)"
+        let objetoURL  = URL(string:urlTipos)//Se crea la url del servicio
+        //print ("Se descargaran Subtipos")
+        //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
+        var jsonRequest = [String:Any]()
+        jsonRequest["idclase"] =  clase.idClase
+        var exito = false;
+        do{
+            //Se arma el cuerpo de la peticiòn a enviar y la respuesta se asignara a jsonResponse
+            let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
+            var request = URLRequest(url: objetoURL!)
+            request.httpMethod = "POST"
+            request.httpBody = jsonResponse
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            // tarea para poder ejecutar la peticion
+            let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
+                if error != nil {
+                    print ("Error en la consulta de los subtipos \(error!)")
+                    print ("Respuesta: \(respuesta)")
+                }else{
+                    do{//se convierte la respuesta del servicio en un json
+                        let subtiposJson = try JSONSerialization.jsonObject(with: datos! , options:
+                            JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                        //Se le dice a CoreData que se almacenaran tipos
+                        let subtipoEntity = NSEntityDescription.entity(forEntityName: "SubTipo", in: self.managedObjectContext)!
+                        //print ("carreteras: \(carreteras)")
+                        for subtipoJson in subtiposJson {
+                            //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
+                            let subtipo = SubTipo(entity: subtipoEntity, insertInto: self.managedObjectContext)
+                            subtipo.idSubtipo = subtipoJson["idsubtipo"]! as! Int16
+                            subtipo.nombre = subtipoJson["nombre"]! as! String
+                            subtipo.clase = subtipoJson["clase"]! as! Int16
+                            print ("SubTipo: \(subtipo.nombre)")
+                        }
+                        // Save
+                        do {
+                            try self.managedObjectContext.save()
+                            UserDefaults.standard.set(true, forKey: "SubTipo")
+                        } catch {
+                            UserDefaults.standard.set(false, forKey: "SubTipo")
+                            fatalError("Failure to save context in Tipo, with error: \(error)")
+                        }
+                    }catch {
+                        print("El Procesamiento del JSON tuvo un error \(error)")
+                        //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                    }
+                }
+            }
+            task.resume()
+        }catch {
+            print("Error casteando la respuesta")
         }
-        return false;
+        
     }
     
-    func descargaOrigenVisible () -> Bool{
-        let urlServicioOrigenVisib = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ORIENTACION)" );
+    func descargaTipoEspecifico(_ tipo:Tipo){
+        let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_TIPO_ESPECIFICO)"
+        let objetoURL  = URL(string:urlTipos)//Se crea la url del servicio
+        //print ("Se descargaran TipoEspecifico")
+        //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
+        var jsonRequest = [String:Any]()
+        jsonRequest["idtipo"] =  tipo.idTipo
+        var exito = false;
+        do{
+            //Se arma el cuerpo de la peticiòn a enviar y la respuesta se asignara a jsonResponse
+            let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
+            var request = URLRequest(url: objetoURL!)
+            request.httpMethod = "POST"
+            request.httpBody = jsonResponse
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            // tarea para poder ejecutar la peticion
+            let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
+                if error != nil {
+                    print ("Error en la consulta de los TipoEspecifico \(error!)")
+                    print ("Respuesta: \(respuesta)")
+                }else{
+                    do{//se convierte la respuesta del servicio en un json
+                        let tiposEspecificosJson = try JSONSerialization.jsonObject(with: datos! , options:
+                            JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                        //Se le dice a CoreData que se almacenaran tipos
+                        let tipoEspEntity = NSEntityDescription.entity(forEntityName: "TipoEsp", in: self.managedObjectContext)!
+                        //print ("carreteras: \(carreteras)")
+                        for tipoEspecificoJson in tiposEspecificosJson {
+                            //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
+                            let tipoEsp = TipoEsp(entity: tipoEspEntity, insertInto: self.managedObjectContext)
+                            tipoEsp.idtipoEsp = tipoEspecificoJson["idtipoEsp"]! as! Int16
+                            tipoEsp.tipo = tipoEspecificoJson["tipo"]! as! Int16
+                            tipoEsp.nombre = tipoEspecificoJson["nombre"]! as! String
+                            print ("TipoEsp: \(tipoEsp.nombre)")
+                            print ("tipo: \(tipoEsp.nombre)")
+                        }
+                        // Save
+                        do {
+                            try self.managedObjectContext.save()
+                            UserDefaults.standard.set(true, forKey: "TipoEsp")
+                        } catch {
+                            UserDefaults.standard.set(false, forKey: "TipoEsp")
+                            fatalError("Failure to save context in Tipo, with error: \(error)")
+                        }
+                    }catch {
+                        print("El Procesamiento del JSON tuvo un error \(error)")
+                        //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                    }
+                }
+            }
+            task.resume()
+        }catch {
+            print("Error casteando la respuesta")
+        }
+        
+    }
+    
+    func descargaTipos(_ clase:Clase){
+        let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_TIPO)"
+        let objetoURL  = URL(string:urlTipos)//Se crea la url del servicio
+        //print ("Se descargaran TIPOS")
+        //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
+        var jsonRequest = [String:Any]()
+        jsonRequest["idclase"] =  clase.idClase
+        var exito = false;
+        do{
+            //Se arma el cuerpo de la peticiòn a enviar y la respuesta se asignara a jsonResponse
+            let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
+            var request = URLRequest(url: objetoURL!)
+            request.httpMethod = "POST"
+            request.httpBody = jsonResponse
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            // tarea para poder ejecutar la peticion
+            let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
+                if error != nil {
+                    print ("Error en la consulta de los tipos \(error!)")
+                    print ("Respuesta: \(respuesta)")
+                }else{
+                    do{//se convierte la respuesta del servicio en un json
+                        let tiposJson = try JSONSerialization.jsonObject(with: datos! , options:
+                            JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                        //Se le dice a CoreData que se almacenaran tipos
+                        let tipoEntity = NSEntityDescription.entity(forEntityName: "Tipo", in: self.managedObjectContext)!
+                        //print ("carreteras: \(carreteras)")
+                        for tipoJson in tiposJson {
+                            //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
+                            let tipo = Tipo(entity: tipoEntity, insertInto: self.managedObjectContext)
+                            tipo.idTipo = tipoJson["idtipo"]! as! NSNumber
+                            tipo.clase = tipoJson["clase"]! as! NSNumber
+                            tipo.nombre = tipoJson["nombre"] as! String
+                            self.descargaTipoEspecifico(tipo)
+                            print ("Tipo: \(tipo.nombre)")
+                        }
+                        // Save
+                        do {
+                            try self.managedObjectContext.save()
+                            UserDefaults.standard.set(true, forKey: "Tipo")
+                        } catch {
+                            UserDefaults.standard.set(false, forKey: "Tipo")
+                            fatalError("Failure to save context in Tipo, with error: \(error)")
+                        }
+                    }catch {
+                        print("El Procesamiento del JSON tuvo un error \(error)")
+                        //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                    }
+                }
+            }
+            task.resume()
+        }catch {
+            print("Error casteando la respuesta")
+        }
+        
+    }
+   
+    func descargaClase () {
+        let urlServicioClase = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CLASE)" );
+        let tarea = URLSession.shared.dataTask(with: urlServicioClase!){
+            (datos, respuesta, error) in
+            if error != nil {
+                print ("Error en la consulta de CLASE")
+            }else{
+                do{
+                    //Casteamos el resultado a un diccionario, para despues recorrerlo
+                    let clasesJ = try JSONSerialization.jsonObject(with: datos! , options:
+                        JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                    let claseEntity = NSEntityDescription.entity(forEntityName: "Clase", in: self.managedObjectContext)!
+                    for claseJ in clasesJ {
+                        let clase = Clase(entity: claseEntity, insertInto: self.managedObjectContext)
+                        clase.idClase = claseJ["idclase"]! as! NSNumber
+                        clase.nombre = claseJ["nombre"]! as? String
+                        print("Clase: \(clase.nombre)")
+                        self.descargaTipos(clase)
+                        self.descargaSubTipos(clase)
+                    }
+                    // Save
+                    do {
+                        try self.managedObjectContext.save()
+                        print("Clase sincronizados")
+                        UserDefaults.standard.set(true, forKey: "Clase")
+                    } catch {
+                        UserDefaults.standard.set(false, forKey: "Clase")
+                        fatalError("Failure to save context in Clase, with error: \(error)")
+                    }
+                }catch{
+                    print("error: ")
+                    print(error)
+                }
+            }
+            
+        }
+        tarea.resume()
+    }
+    
+    
+    func descargaLado () {
+        let urlServicioLado = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_LADO)" );
+        let tarea = URLSession.shared.dataTask(with: urlServicioLado!){
+            (datos, respuesta, error) in
+            if error != nil {
+                print ("Error en la consulta de Lado")
+            }else{
+                do{
+                    let lados = try JSONSerialization.jsonObject(with: datos! , options:
+                        JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                    let ladoEntity = NSEntityDescription.entity(forEntityName: "Lado", in: self.managedObjectContext)!
+                    for ladoJ in lados {
+                        let lado = Lado(entity: ladoEntity, insertInto: self.managedObjectContext)
+                        lado.idLado = ladoJ["idlado"]! as! Int16
+                        lado.nombre = ladoJ["nombre"]! as! String
+                    }
+                    // Save
+                    do {
+                        try self.managedObjectContext.save()
+                        print("Lados sincronizados")
+                        UserDefaults.standard.set(true, forKey: "Lado")
+                    } catch {
+                        UserDefaults.standard.set(false, forKey: "Lado")
+                        fatalError("Failure to save context in Lado, with error: \(error)")
+                    }
+                }catch{
+                    print("error: ")
+                    print(error)
+                }
+            }
+            
+        }
+        tarea.resume()
+    }
+    
+    func descargaCuerpo () {
+        let urlServicioCuerpo = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CUERPO)" );
+        let tarea = URLSession.shared.dataTask(with: urlServicioCuerpo!){
+            (datos, respuesta, error) in
+            if error != nil {
+                print ("Error en la consulta de Cuerpo")
+            }else{
+                do{
+                    //Casteamos el resultado a un diccionario, para despues recorrerlo
+                    let cuerposJ = try JSONSerialization.jsonObject(with: datos! , options:
+                        JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                    let cuerpoEntity = NSEntityDescription.entity(forEntityName: "Cuerpo", in: self.managedObjectContext)!
+                    for cuerpoJ in cuerposJ {
+                        let cuerpo = Cuerpo(entity: cuerpoEntity, insertInto: self.managedObjectContext)
+                        cuerpo.idCuerpo = cuerpoJ["idcuerpo"]! as! Int16
+                        cuerpo.nombre = cuerpoJ["nombre"]! as! String
+                    }
+                    // Save
+                    do {
+                        try self.managedObjectContext.save()
+                        print("Cuerpo sincronizados")
+                        UserDefaults.standard.set(true, forKey: "Cuerpo")
+                    } catch {
+                        UserDefaults.standard.set(false, forKey: "Cuerpo")
+                        fatalError("Failure to save context in Cuerpo, with error: \(error)")
+                    }
+                }catch{
+                    print("error: ")
+                    print(error)
+                }
+            }
+            
+        }
+        tarea.resume()
+    }
+    
+    func isCatalogoDescargado(estaAlmacenado nombre: String) -> Bool{
+        return UserDefaults.standard.bool(forKey: nombre)
+           
+    }
+    
+    func descargaOrigenVisible () {
+        let urlServicioOrigenVisib = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ORIENVISIB)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioOrigenVisib!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta del origen")
             }else{
+                do{
+                    let origenesVisibles = try JSONSerialization.jsonObject(with: datos! , options:
+                        JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                    let origenVisibleEntity = NSEntityDescription.entity(forEntityName: "OrienVisib", in: self.managedObjectContext)!
+                    for origen in origenesVisibles {
+                        let origenVisible = OrienVisib(entity: origenVisibleEntity, insertInto: self.managedObjectContext)
+                        origenVisible.idOrienVisib = origen["orienVisib"]! as! Int16
+                        origenVisible.nombre = origen["nombre"]! as! String
+                        print(origenVisible.nombre)
+                    }
+                    // Save
+                    do {
+                        try self.managedObjectContext.save()
+                        UserDefaults.standard.set(true, forKey: "OrienVisib")
+                        print("OrienVisib sincronizados")
+                    } catch {
+                        UserDefaults.standard.set(false, forKey: "OrienVisib")
+                        fatalError("Failure to save context in OrigenVisible, with error: \(error)")
+                    }
+                }catch{
+                    print("error: ")
+                    print(error)
+                }
             }
             
         }
-        return false
+        tarea.resume()
     }
-            
-            
-            
-            
+    
     
     func descargaEntidadesFederativas () -> Bool{
         let urlServicioEntidades = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ENTIDADFEDERATIVA)" );
@@ -180,6 +486,7 @@ class Sincronizador {
                     do {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(true, forKey: "EntidadFederativa")
+                        print("EntidadFederativa sincronizados")
                     } catch {
                         UserDefaults.standard.set(false, forKey: "EntidadFederativa")
                         fatalError("Failure to save context in Entidades Federativas, with error: \(error)")
@@ -232,7 +539,7 @@ class Sincronizador {
                             //print ("Se descarga carretera - JSON: \(car)")
                             //print ("Se descarga carretera: \(idCarretera)")
                             //Se descargan os tramos de dicha carretera
-                            //self.descargaTramo(urlServicioTramos, idCarretera)
+                            self.descargaTramo(urlServicioTramos, idCarretera)
                             //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
                             //let carretera = NSManagedObject(entity: carreteraEntity, insertInto: managedObjectContext)
                             let carretera = Carretera(entity: carreteraEntity, insertInto: self.managedObjectContext)
@@ -298,9 +605,12 @@ class Sincronizador {
                             let tramo = Tramo(entity: tramoEntity, insertInto: self.managedObjectContext)
                             tramo.idCarretera = tramoJson["carretera"]! as! NSNumber
                             tramo.idTramo = tramoJson["idtramo"]! as! NSNumber
-                            tramo.origen = tramoJson["origen"]! as! String
-                            tramo.destino = tramoJson["destino"]! as! String
+                            tramo.origen = tramoJson["origen"]! as? String
+                            tramo.destino = tramoJson["destino"]! as? String
+                            
+                            print ("idTramo: \(tramo.idTramo)")
                             print ("Tramo: \(tramo.origen)")
+                            print ("idCarretera: \(tramo.idCarretera)")
                         }
                         // Save
                         do {
@@ -331,7 +641,7 @@ class Sincronizador {
         //let userFetch = NSFetchRequest<EntidadFederativa>(entityName: entidad)
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:nombreEntidad)
         //userFetch.fetchLimit = 1
-        let entitys = try! managedObjectContext.fetch(fetchRequest) as? [AnyObject]
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
         
         /*var entidades :[AnyObject]? = nil
@@ -347,6 +657,51 @@ class Sincronizador {
          }*/
     }
     
+    func getAnyEntity (_ nombreEntidad:String) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:nombreEntidad)
+        //userFetch.fetchLimit = 1
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
     
+    func getCarreterasByEntidad (_ entidad:EntidadFederativa) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Carretera")
+        //userFetch.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "idEntidadFederativa == %@", entidad.idEntidadFederativa)
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getTramosByCarretera (_ carretera:Carretera) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tramo")
+        //userFetch.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "idCarretera == %@", carretera.idCarretera)
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+  
+    func getTiposByClase (_ clase:Clase) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tipo")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "clase == %@", clase.idClase)
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+
+    func getTipoEspByTipo(tipo:Tipo) ->[AnyObject]{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"TipoEsp")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "tipo == %@", tipo.idTipo)
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getSubTipoByClase(clase:Clase) ->[AnyObject]{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"SubTipo")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "clase == %@", clase.idClase)
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
     
 }

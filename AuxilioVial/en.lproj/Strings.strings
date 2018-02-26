@@ -1,0 +1,8 @@
+/* 
+  Strings.strings
+  AuxilioVial
+
+  Created by Iris Viridiana on 25/01/18.
+  Copyright © 2018 Iris Viridiana. All rights reserved.
+*/
+"msg_registro_usuario" = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."

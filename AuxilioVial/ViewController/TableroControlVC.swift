@@ -9,7 +9,7 @@
 import UIKit
 
 class TableroControlVC: UITabBarController {
-    var json: [String:Any]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,8 @@ class TableroControlVC: UITabBarController {
         print("estatus: \(estatus)")*/
         // Do any additional setup after loading the view.
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

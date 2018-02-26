@@ -126,7 +126,7 @@ class LoginVC: UIViewController {
         //let ussuario = sender as! String
         if segue.identifier == "pantallaTableroSegue"{
             let objPantallTablero: TableroControlVC = segue.destination as! TableroControlVC
-            objPantallTablero.json = sender as? [String : Any]!
+            //objPantallTablero.json = sender as? [String : Any]!
         }
     }
     
