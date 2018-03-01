@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class Alert{
+public class Alert{
     
     func mostrarAlertaSencilla(titulo titulo:String, mensaje mensaje:String) -> UIViewController{
         let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)

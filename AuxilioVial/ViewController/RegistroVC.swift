@@ -82,63 +82,67 @@ class RegistroVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func enviarBtn(_ sender: Any) {
-        let nombre: String? = nombreTF.text
-        let paterno: String? = paternoTF.text
-        let materno: String? = maternoTF.text
-        let correo: String? = correoTF.text
-        //let entidad: String? = entidadPV.text
-        let contrasena: String? = contrasenaTF.text
-        let confirmContrasena: String? = contrasenaConfirmTF.text
-        if validacionFormulario(nombre, paterno, materno, correo, contrasena, confirmContrasena) && validacionContrasena(contrasena, confirmContrasena){
-            //codigo para registrar con json
-            var jsonRequest = [String:Any]()
-            jsonRequest["nombre"] = nombre
-            jsonRequest["ap"] = paterno
-            jsonRequest["am"] = materno
-            jsonRequest["correo"] = correo
-            jsonRequest["contrasenia"] = contrasena
-            jsonRequest["idEntidad"] = entidad!.idEntidadFederativa
-            do{
-                let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
-                var request = URLRequest(url: URL(string:urlServicioRegistro)!)
-                print(urlServicioRegistro)
-                request.httpMethod = "POST"
-                request.httpBody = jsonResponse
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
-                let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
-                    if error != nil {
-                        print ("Error en el registro de usuario \(error!)")
-                        print ("Respuesta: \(String(describing: respuesta))")
-                        DispatchQueue.main.sync(execute: {
-                            self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_FALLIDO, mensaje : self.strings.MENSAJE_REGISTRO_FALLIDO), animated: true, completion: nil)
-                        })
-                    }else{
-                        do{//se convierte la respuesta del servicio en un json
-                            let respuesta = try JSONSerialization.jsonObject(with: datos! , options:
-                                JSONSerialization.ReadingOptions.mutableContainers) as! [String:Any]
-                            print(respuesta)
-                            let idUsuario:Int = (respuesta["idUsuario"]! as? Int)!
-                            print(idUsuario)
-                            print(idUsuario)
+        if Conexion.isConnectedToNetwork(){
+            let nombre: String? = nombreTF.text
+            let paterno: String? = paternoTF.text
+            let materno: String? = maternoTF.text
+            let correo: String? = correoTF.text
+            //let entidad: String? = entidadPV.text
+            let contrasena: String? = contrasenaTF.text
+            let confirmContrasena: String? = contrasenaConfirmTF.text
+            if validacionFormulario(nombre, paterno, materno, correo, contrasena, confirmContrasena) && validacionContrasena(contrasena, confirmContrasena){
+                //codigo para registrar con json
+                var jsonRequest = [String:Any]()
+                jsonRequest["nombre"] = nombre
+                jsonRequest["ap"] = paterno
+                jsonRequest["am"] = materno
+                jsonRequest["correo"] = correo
+                jsonRequest["contrasenia"] = contrasena
+                jsonRequest["idEntidad"] = entidad!.idEntidadFederativa
+                do{
+                    let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
+                    var request = URLRequest(url: URL(string:urlServicioRegistro)!)
+                    print(urlServicioRegistro)
+                    request.httpMethod = "POST"
+                    request.httpBody = jsonResponse
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
+                        if error != nil {
+                            print ("Error en el registro de usuario \(error!)")
+                            print ("Respuesta: \(String(describing: respuesta))")
                             DispatchQueue.main.sync(execute: {
-                                if idUsuario == 666{
-                                    self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_EXITOSO, mensaje : self.strings.MENSAJE_REGISTRO_EXITOSO), animated: true, completion: nil)
-                                    self.limpiarFormulario()
-                                }else{
-                                    self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_FALLIDO, mensaje : self.strings.MENSAJE_REGISTRO_FALLIDO), animated: true, completion: nil)
-                                }
+                                self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_FALLIDO, mensaje : self.strings.MENSAJE_REGISTRO_FALLIDO), animated: true, completion: nil)
                             })
-                        }catch {
-                            print("El Procesamiento del JSON tuvo un error \(error)")
-                            //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                        }else{
+                            do{//se convierte la respuesta del servicio en un json
+                                let respuesta = try JSONSerialization.jsonObject(with: datos! , options:
+                                    JSONSerialization.ReadingOptions.mutableContainers) as! [String:Any]
+                                print(respuesta)
+                                let idUsuario:Int = (respuesta["idUsuario"]! as? Int)!
+                                print(idUsuario)
+                                print(idUsuario)
+                                DispatchQueue.main.sync(execute: {
+                                    if idUsuario == 666{
+                                        self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_EXITOSO, mensaje : self.strings.MENSAJE_REGISTRO_EXITOSO), animated: true, completion: nil)
+                                        self.limpiarFormulario()
+                                    }else{
+                                        self.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_REGISTRO_FALLIDO, mensaje : self.strings.MENSAJE_REGISTRO_FALLIDO), animated: true, completion: nil)
+                                    }
+                                })
+                            }catch {
+                                print("El Procesamiento del JSON tuvo un error \(error)")
+                                //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                            }
                         }
                     }
+                    task.resume()
+                }catch{
+                    print("El Procesamiento del JSON tuvo un error 2 \(error)")
                 }
-                task.resume()
-            }catch{
-                print("El Procesamiento del JSON tuvo un error 2 \(error)")
             }
+        }else{
+            present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ADVERTENCIA, mensaje : strings.MENSAJE_SIN_INTERNET), animated: true, completion: nil)
         }
     }
     

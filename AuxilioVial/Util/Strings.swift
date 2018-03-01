@@ -37,6 +37,7 @@ class Strings {
     let TITULO_POR_FAVOR: String = "Por favor"
     let TITULO_ERROR_VALIDACION: String = "Error de validación"
     let MSG_ERROR_REGISTRO: String = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
+    let MENSAJE_SIN_INTERNET: String = "Conectese a internet para poder realizar la operación."
     let MSG_EXITO_REGISTRO: String = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
     
     let servidor: String = "http://187.188.120.156"

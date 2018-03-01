@@ -12,7 +12,8 @@ class SincronizadorVC: UIViewController {
     var json: [String:Any]?
     var hayIncidenciasParaSinc:Bool = false
     var auxVialDAO = AuxilioVialDAO()
-    
+    let alert = Alert()
+    let strings = Strings()
     var total:Int16 = 0
     var incSincronizadas:Int16 = 0
     var incPorSinc:Int16 = 0
@@ -31,6 +32,11 @@ class SincronizadorVC: UIViewController {
     @IBOutlet weak var sincronizarUIBtn: UIButton!
     
     @IBAction func sincronizarBtn(_ sender: Any) {
+        if Conexion.isConnectedToNetwork(){
+            
+        }else{
+            present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ADVERTENCIA, mensaje : strings.MENSAJE_SIN_INTERNET), animated: true, completion: nil)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
