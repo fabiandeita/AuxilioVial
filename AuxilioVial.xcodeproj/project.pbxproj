@@ -26,6 +26,7 @@
 		1C82025C1FF04BCF00A96668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025B1FF04BCF00A96668 /* Assets.xcassets */; };
 		1C82025F1FF04BCF00A96668 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */; };
 		1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8202672002EFB700A96668 /* TableroControlVC.swift */; };
+		1CA8A1CD2060555F00711EEA /* Consulta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8A1CC2060555F00711EEA /* Consulta.swift */; };
 		1CDC33F5203D3D3600DA0E67 /* Localizacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDC33F4203D3D3600DA0E67 /* Localizacion.swift */; };
 		1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CB9A200F10980072EA1B /* EntidadFederativa.swift */; };
 		1CE6CB9D200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CB9B200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift */; };
@@ -71,6 +72,7 @@
 		1C82025E1FF04BCF00A96668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C8202601FF04BCF00A96668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C8202672002EFB700A96668 /* TableroControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableroControlVC.swift; sourceTree = "<group>"; };
+		1CA8A1CC2060555F00711EEA /* Consulta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consulta.swift; sourceTree = "<group>"; };
 		1CDC33F4203D3D3600DA0E67 /* Localizacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizacion.swift; sourceTree = "<group>"; };
 		1CE6CB9A200F10980072EA1B /* EntidadFederativa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntidadFederativa.swift; sourceTree = "<group>"; };
 		1CE6CB9B200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EntidadFederativa+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				1C50A7CC2026284F00123E5A /* AltaVC.swift */,
 				1C20D1652038C4F000D0AB8D /* SincronizadorVC.swift */,
 				1C1D8C7E2043C67D002A0CE1 /* ImageViewController.swift */,
+				1CA8A1CC2060555F00711EEA /* Consulta.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				1C616258200B1D960087A859 /* Sincronizador.swift in Sources */,
 				1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */,
 				1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */,
+				1CA8A1CD2060555F00711EEA /* Consulta.swift in Sources */,
 				1C1D8C812047A8E0002A0CE1 /* Conexion.swift in Sources */,
 				1CE6CBC6201070330072EA1B /* Carretera.swift in Sources */,
 				1CE6CBE22012F7840072EA1B /* TipoEsp.swift in Sources */,
