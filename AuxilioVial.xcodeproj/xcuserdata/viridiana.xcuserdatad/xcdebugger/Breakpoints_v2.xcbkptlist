@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.991457"
+            timestampString = "543710674.607977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.9919"
+            timestampString = "543710674.608048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/LoginVC.swift"
-            timestampString = "541567699.533711"
+            timestampString = "543710674.608094"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6"
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.99217"
+            timestampString = "543710674.608427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
-            landmarkName = "isCatalogoDescargado(estaAlmacenado:)"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.992396"
+            timestampString = "543710674.6084729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
-            landmarkName = "isCatalogoDescargado(estaAlmacenado:)"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,28 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.992615"
+            timestampString = "543710674.608515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
-            landmarkName = "isCatalogoDescargado(estaAlmacenado:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.992848"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "descargaCatalogos()"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -362,12 +346,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.993198"
+            timestampString = "543710674.608698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "descargaCatalogos()"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -378,44 +362,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.993517"
+            timestampString = "543710674.608744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "descargaCatalogos()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.993801"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
-            landmarkName = "descargaOrigenVisible()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.994054"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "descargaOrigenVisible()"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -426,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0652159"
+            timestampString = "543708178.404927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "260"
@@ -442,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065277"
+            timestampString = "543708178.405004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
@@ -458,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065316"
+            timestampString = "543708178.405056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
@@ -474,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065372"
+            timestampString = "543708178.405102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "263"
@@ -490,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.06541"
+            timestampString = "543708178.405147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
@@ -506,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065447"
+            timestampString = "543708178.4051909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "538"
@@ -522,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0654989"
+            timestampString = "543708178.405236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "527"
@@ -538,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065551"
+            timestampString = "543708178.40528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "528"
@@ -554,12 +506,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.994635"
+            timestampString = "543710674.608871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
-            landmarkName = "getTramosByCarretera(_:)"
+            startingLineNumber = "801"
+            endingLineNumber = "801"
+            landmarkName = "getEntidadesFederativas(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -570,12 +522,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.9948781"
+            timestampString = "543710674.608912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "678"
-            endingLineNumber = "678"
-            landmarkName = "getTramosByCarretera(_:)"
+            startingLineNumber = "803"
+            endingLineNumber = "803"
+            landmarkName = "getEntidadesFederativas(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -586,12 +538,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.995083"
+            timestampString = "543710674.608971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
-            landmarkName = "getTramosByCarretera(_:)"
+            startingLineNumber = "805"
+            endingLineNumber = "805"
+            landmarkName = "getAnyEntity(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -602,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/LoginVC.swift"
-            timestampString = "541567699.537106"
+            timestampString = "543710674.609035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -618,12 +570,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.995321"
+            timestampString = "543710674.609338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "descargaCatalogos()"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
+            landmarkName = "isCatalogoDescargado(estaAlmacenado:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -634,13 +586,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.995524"
+            timestampString = "543710674.6093839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
-            landmarkName = "descargaOrigenVisible()"
-            landmarkType = "7">
+            startingLineNumber = "564"
+            endingLineNumber = "564"
+            landmarkName = "Sincronizador"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -650,28 +602,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.99572"
+            timestampString = "543710674.6094249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
-            landmarkName = "descargaOrigenVisible()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.996003"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
-            landmarkName = "descargaOrigenVisible()"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -714,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.996217"
+            timestampString = "543710674.609466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "descargaOrigenVisible()"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.996442"
+            timestampString = "543710674.609506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "580"
+            endingLineNumber = "580"
             landmarkName = "descargaOrigenVisible()"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,12 +682,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.996647"
+            timestampString = "543710674.609544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
-            landmarkName = "descargaOrigenVisible()"
+            startingLineNumber = "558"
+            endingLineNumber = "558"
+            landmarkName = "descargaCuerpo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -762,7 +698,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065806"
+            timestampString = "543708178.406114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "317"
@@ -778,7 +714,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0658489"
+            timestampString = "543708178.4061511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "366"
@@ -794,7 +730,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065888"
+            timestampString = "543708178.406191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "358"
@@ -810,7 +746,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065925"
+            timestampString = "543708178.406231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "359"
@@ -826,7 +762,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.065976"
+            timestampString = "543708178.406265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "361"
@@ -874,13 +810,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.997532"
+            timestampString = "543710674.609642"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "686"
-            endingLineNumber = "686"
-            landmarkName = "getTiposByClase(_:)"
-            landmarkType = "7">
+            startingLineNumber = "811"
+            endingLineNumber = "811"
+            landmarkName = "Sincronizador"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -890,12 +826,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/DataController/Sincronizador.swift"
-            timestampString = "540883552.997924"
+            timestampString = "543710674.609684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
-            landmarkName = "getTiposByClase(_:)"
+            startingLineNumber = "812"
+            endingLineNumber = "812"
+            landmarkName = "getCarreterasByEntidad(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -906,7 +842,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0660501"
+            timestampString = "543708178.4063931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "492"
@@ -922,7 +858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066089"
+            timestampString = "543708178.40644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "495"
@@ -938,7 +874,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066126"
+            timestampString = "543708178.406487"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
@@ -986,7 +922,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0661629"
+            timestampString = "543708178.40652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
@@ -1002,7 +938,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0662"
+            timestampString = "543708178.406552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "491"
@@ -1018,7 +954,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066236"
+            timestampString = "543708178.4065861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "494"
@@ -1034,7 +970,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066299"
+            timestampString = "543708178.406617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "500"
@@ -1050,7 +986,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0664181"
+            timestampString = "543708178.4066499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -1128,7 +1064,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066473"
+            timestampString = "543708178.406683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
@@ -1144,7 +1080,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.06653"
+            timestampString = "543708178.406715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "328"
@@ -1160,7 +1096,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.0665849"
+            timestampString = "543708178.40675"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "329"
@@ -1176,11 +1112,523 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AuxilioVial/ViewController/AltaVC.swift"
-            timestampString = "541568215.066623"
+            timestampString = "543708178.406785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "330"
             endingLineNumber = "330"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.60985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.6098911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.609931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.609969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AuxilioVial.Sincronizador.descargaAuxvialByEntidad(Swift.Int) -&gt; ()"
+                  moduleName = "AuxilioVial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viridiana/iCloud%20Drive%20(archivo)/Desktop/Workspace/IOS/AuxilioVial/AuxilioVial/AuxilioVial/DataController/Sincronizador.swift"
+                  timestampString = "543296960.694344"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "3815">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__ObjC.URLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in AuxilioVial.Sincronizador.descargaAuxvialByEntidad(Swift.Int) -&gt; ()"
+                  moduleName = "AuxilioVial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viridiana/iCloud%20Drive%20(archivo)/Desktop/Workspace/IOS/AuxilioVial/AuxilioVial/AuxilioVial/DataController/Sincronizador.swift"
+                  timestampString = "543296960.69727"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "38">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.610008"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/Consulta.swift"
+            timestampString = "543706261.0399491"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "Busqueda(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.61006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/AuxilioVialDAO.swift"
+            timestampString = "543706261.040406"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "getAuxvialByIdAuxvial(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/AuxilioVialDAO.swift"
+            timestampString = "543706261.040459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "getAuxvialByIdAuxvial(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/AuxilioVialDAO.swift"
+            timestampString = "543706261.040504"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "getAuxvialByIdAuxvial(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.610131"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.610172"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.610211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "descargaAuxvialByEntidad(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/AuxilioVialDAO.swift"
+            timestampString = "543706261.041747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "getAuxiliovialConsulta(incidentes:accidentes:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.6102639"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "logueoServidor(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.6105011"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.610706"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.610914"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "descargaCatalogos()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "descargaCatalogos()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611202"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "descargaCatalogos()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611239"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "descargaCatalogos()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611277"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "595"
+            endingLineNumber = "595"
+            landmarkName = "descargaOrigenVisible()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611313"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "593"
+            endingLineNumber = "593"
+            landmarkName = "descargaOrigenVisible()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AuxilioVial.Sincronizador.descargaEntidadesFederativas() -&gt; Swift.Bool"
+                  moduleName = "AuxilioVial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viridiana/iCloud%20Drive%20(archivo)/Desktop/Workspace/IOS/AuxilioVial/AuxilioVial/AuxilioVial/DataController/Sincronizador.swift"
+                  timestampString = "543709299.621478"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "593"
+                  endingLineNumber = "593"
+                  offsetFromSymbolStart = "1644">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__ObjC.URLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in AuxilioVial.Sincronizador.descargaEntidadesFederativas() -&gt; Swift.Bool"
+                  moduleName = "AuxilioVial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/viridiana/iCloud%20Drive%20(archivo)/Desktop/Workspace/IOS/AuxilioVial/AuxilioVial/AuxilioVial/DataController/Sincronizador.swift"
+                  timestampString = "543709299.623289"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "591"
+                  endingLineNumber = "591"
+                  offsetFromSymbolStart = "38">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.6113501"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "625"
+            endingLineNumber = "625"
+            landmarkName = "descargaEntidadesFederativas()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/DataController/Sincronizador.swift"
+            timestampString = "543710674.611387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "627"
+            endingLineNumber = "627"
+            landmarkName = "descargaEntidadesFederativas()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.611424"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AuxilioVial/ViewController/LoginVC.swift"
+            timestampString = "543710674.611604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>

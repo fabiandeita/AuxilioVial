@@ -16,7 +16,7 @@ class Sincronizador {
     var managedObjectContext: NSManagedObjectContext!
     var alert = Alert()
     var appDelegate:AppDelegate
-    
+    var auxvialDAO:AuxilioVialDAO = AuxilioVialDAO()
     init() {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
@@ -87,19 +87,27 @@ class Sincronizador {
     func descargaCatalogos () -> Bool{
         //el metodo isCatalogoDescargado devuelve true o false, si ya existe en los defaults del usuario, el nombre de algun catalogo descargado. el siguiente IF se repite para cada catalogo, solo se cambia el tipo de entidad a sincronizar
         if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
-            descargaEntidadesFederativas()
+            if(!descargaEntidadesFederativas()){
+                return false
+            }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "OrienVisib"){
-            descargaOrigenVisible()
+            if(!descargaOrigenVisible()){
+                return false
+            }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Lado"){
-            descargaLado()
+            if(!descargaLado()){
+                return false
+            }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Clase"){
-            descargaClase()
+            if(!descargaClase()){
+                return false
+            }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "TipoEsp"){
@@ -107,7 +115,9 @@ class Sincronizador {
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Cuerpo"){
-            descargaCuerpo()
+            if(!descargaCuerpo()){
+                return false
+            }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Tipo"){
@@ -118,27 +128,130 @@ class Sincronizador {
             //descargaSubTipos()
         }
         
-        
-        
-        
-        /*Estos catalogos se descargaran cuando se loge el usuario, ya que hasta ese punto sabremos de que entidad es, igualmente si se logea otro usuario se actualizaran las tablas de carretera y tramo.
-       if !isCatalogoDescargado(estaAlmacenado: "Carretera"){
-            print ("Descargando catálogo Carretera")
-            descargaCarreteras()
-        }
-        
-        if !isCatalogoDescargado(estaAlmacenado: "Tramo"){
-            print ("Descargando catálogo Tramo")
-            descargaTramos()
-        }
-        */
-        //Continua la descarga de catalogos, revisar codigo fuente para desarga de catalogos por post y por get, ya que cambia el código
-        
         var localizacion:Localizacion?
         localizacion = Localizacion()
         return false
     }
     
+    func isCatalogosDescargados () -> Bool{
+        //el metodo isCatalogoDescargado devuelve true o false, si ya existe en los defaults del usuario, el nombre de algun catalogo descargado. el siguiente IF se repite para cada catalogo, solo se cambia el tipo de entidad a sincronizar
+        if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "OrienVisib"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "Lado"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "Clase"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "TipoEsp"){
+            //descargaTipoEsp()
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "Cuerpo"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "Tipo"){
+            return false
+        }
+        
+        if !isCatalogoDescargado(estaAlmacenado: "SubTipo"){
+            return false
+        }
+        return true
+    }
+    
+    
+    func descargaAuxvialByEntidad(_ entidadId:Int){
+        let urlAuxvial = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_AUXVIAL)"
+        let objetoURL  = URL(string:urlAuxvial)//Se crea la url del servicio
+        //print ("Se descargaran Subtipos")
+        //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
+        var jsonRequest = [String:Any]()
+        jsonRequest["identidad"] =  "\(entidadId)"  
+        jsonRequest["nombre"] =  ""
+        jsonRequest["clave"] =  ""
+        jsonRequest["activo"] =  nil
+        var exito = false;
+        do{
+            //Se arma el cuerpo de la peticiòn a enviar y la respuesta se asignara a jsonResponse
+            let jsonResponse = try JSONSerialization.data(withJSONObject: jsonRequest, options: [])
+            var request = URLRequest(url: objetoURL!)
+            request.httpMethod = "POST"
+            request.httpBody = jsonResponse
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            // tarea para poder ejecutar la peticion
+            let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
+                if error != nil {
+                    print ("Error en la consulta de Auxvial \(error!)")
+                    print ("Respuesta: \(respuesta)")
+                }else{
+                    do{//se convierte la respuesta del servicio en un json
+                        let auxvialesJson = try JSONSerialization.jsonObject(with: datos! , options:
+                            JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
+                        //Se le dice a CoreData que se almacenaran Auxvial
+                        let auxiliovialEntity = NSEntityDescription.entity(forEntityName: "Auxvial", in: self.managedObjectContext)!
+                        for auxJson in auxvialesJson {
+                            let aux = self.auxvialDAO.getAuxvialByIdAuxvial(auxJson["idauxvial"]! as! Int16)
+                            if aux?.count == 0{
+                                //Se genera un Auxvial de Core Data - Auxvial.swift y se rellena con la info del json
+                                let auxilioVial = Auxvial(entity: auxiliovialEntity, insertInto: self.managedObjectContext)
+                                auxilioVial.altitud = auxJson["altitud"]! as! Double
+                                auxilioVial.danioCamino = auxJson["danioCamino"]! as? String
+                                auxilioVial.descripcion = auxJson["descripcion"]! as? String
+                                auxilioVial.durEvento = auxJson["durEvento"]! as? String
+                                auxilioVial.fechaConoc = auxJson["fechaConoc"]! as? Date
+                                auxilioVial.fechacreacion = auxJson["fechacreacion"]! as? Date
+                                auxilioVial.fuenteInf = auxJson["fuenteInf"]! as? String
+                                auxilioVial.idCuerpo = auxJson["idCuerpo"]! as! Int16
+                                auxilioVial.idLado = auxJson["idLado"]! as! Int16
+                                auxilioVial.idOrienVisible = auxJson["idOrienVisible"]! as! Int16
+                                auxilioVial.idSubtipo = auxJson["idSubtipo"]! as! Int16
+                                auxilioVial.idTipoEsp = auxJson["idTipoEsp"]! as! Int16
+                                auxilioVial.idTramo = auxJson["idTramo"]! as! NSNumber
+                                auxilioVial.idauxvial = auxJson["idauxvial"]! as! Int16
+                                auxilioVial.kmFinal = auxJson["kmFinal"]! as? String
+                                auxilioVial.kmInicio = auxJson["kmInicio"]! as? String
+                                auxilioVial.latitud = auxJson["latitud"]! as! Double
+                                auxilioVial.lesionados = auxJson["lesionados"]! as? String
+                                auxilioVial.longitud = auxJson["longitud"]! as! Double
+                                auxilioVial.muertos = auxJson["muestos"]! as? String
+                                auxilioVial.observaciones = auxJson["observaciones"]! as? String
+                                auxilioVial.residenteVial = auxJson["residenteVial"]! as? String
+                                auxilioVial.vehiculo = auxJson["vehiculo"]! as? String
+                                auxilioVial.vehiculosInvolucrados = auxJson["vehiculosInvolucrados"]! as? String
+                            }
+                            //print ("Auxvial: \(auxJson)")
+                        }
+                        // Save
+                        do {
+                            try self.managedObjectContext.save()
+                            UserDefaults.standard.set(true, forKey: "Auxvial")
+                        } catch {
+                            UserDefaults.standard.set(false, forKey: "Auxvial")
+                            fatalError("Failure to save context in Auxvial, with error: \(error)")
+                        }
+                    }catch {
+                        print("El Procesamiento del JSON tuvo un error \(error)")
+                        //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                    }
+                }
+            }
+            task.resume()
+        }catch {
+            print("Error casteando la respuesta")
+        }
+        
+    }
     
     func descargaSubTipos(_ clase:Clase){
         let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_SUBTIPO)"
@@ -313,7 +426,8 @@ class Sincronizador {
         
     }
    
-    func descargaClase () {
+    func descargaClase () ->  Bool{
+        var exito = false
         let urlServicioClase = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CLASE)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioClase!){
             (datos, respuesta, error) in
@@ -338,6 +452,7 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         print("Clase sincronizados")
                         UserDefaults.standard.set(true, forKey: "Clase")
+                        exito=true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Clase")
                         fatalError("Failure to save context in Clase, with error: \(error)")
@@ -350,10 +465,12 @@ class Sincronizador {
             
         }
         tarea.resume()
+        return exito
     }
     
     
-    func descargaLado () {
+    func descargaLado ()-> Bool {
+        var exito=false
         let urlServicioLado = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_LADO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioLado!){
             (datos, respuesta, error) in
@@ -374,6 +491,7 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         print("Lados sincronizados")
                         UserDefaults.standard.set(true, forKey: "Lado")
+                        exito=true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Lado")
                         fatalError("Failure to save context in Lado, with error: \(error)")
@@ -386,9 +504,11 @@ class Sincronizador {
             
         }
         tarea.resume()
+        return exito
     }
     
-    func descargaCuerpo () {
+    func descargaCuerpo ()-> Bool {
+        var exito = false
         let urlServicioCuerpo = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CUERPO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioCuerpo!){
             (datos, respuesta, error) in
@@ -410,6 +530,7 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         print("Cuerpo sincronizados")
                         UserDefaults.standard.set(true, forKey: "Cuerpo")
+                        exito=true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Cuerpo")
                         fatalError("Failure to save context in Cuerpo, with error: \(error)")
@@ -422,6 +543,7 @@ class Sincronizador {
             
         }
         tarea.resume()
+        return exito
     }
     
     func isCatalogoDescargado(estaAlmacenado nombre: String) -> Bool{
@@ -429,7 +551,8 @@ class Sincronizador {
            
     }
     
-    func descargaOrigenVisible () {
+    func descargaOrigenVisible () ->Bool{
+        var exito = false;
         let urlServicioOrigenVisib = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ORIENVISIB)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioOrigenVisib!){
             (datos, respuesta, error) in
@@ -451,6 +574,7 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(true, forKey: "OrienVisib")
                         print("OrienVisib sincronizados")
+                        return true;
                     } catch {
                         UserDefaults.standard.set(false, forKey: "OrienVisib")
                         fatalError("Failure to save context in OrigenVisible, with error: \(error)")
@@ -463,15 +587,18 @@ class Sincronizador {
             
         }
         tarea.resume()
+        return exito;
     }
     
     
     func descargaEntidadesFederativas () -> Bool{
+        var exito = false
         let urlServicioEntidades = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ENTIDADFEDERATIVA)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioEntidades!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta de las entidades")
+                exito =  false
             }else{
                 do{
                     let entidades = try JSONSerialization.jsonObject(with: datos! , options:
@@ -487,19 +614,21 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(true, forKey: "EntidadFederativa")
                         print("EntidadFederativa sincronizados")
+                        exito =  true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "EntidadFederativa")
                         fatalError("Failure to save context in Entidades Federativas, with error: \(error)")
+                        exito =  false
                     }
                 }catch{
-                    print("error: ")
                     print(error)
+                    exito =  false
                 }
             }
         }
         tarea.resume()
         
-        return true
+        return exito
     }
     
     func descargaCarreteras () -> Bool{

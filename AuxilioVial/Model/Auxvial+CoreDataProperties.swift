@@ -31,9 +31,9 @@ extension Auxvial {
     @NSManaged public var kmInicio: String?
     @NSManaged public var kmFinal: String?
     @NSManaged public var fuenteInf: String?
-    @NSManaged public var fechaConoc: String?
+    @NSManaged public var fechaConoc: Date?
     @NSManaged public var residenteVial: String?
-    @NSManaged public var fechacreacion: String?
+    @NSManaged public var fechacreacion: Date?
     @NSManaged public var observaciones: String?
     @NSManaged public var tiempoRespuesta: String?
     @NSManaged public var durEvento: String?

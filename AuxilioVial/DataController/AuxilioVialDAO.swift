@@ -79,5 +79,57 @@ class AuxilioVialDAO {
     " where a.syncser <> 1 AND T.icveclase = 2 ";
         return 0;
     }
+    
+    func getAuxiliovial() ->[AnyObject]{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        //userFetch.fetchLimit = 1
+        let entitys = try! managedObjectContext?.fetch(fetchRequest)
+        return entitys!
+    }
+    
+    func getAuxiliovialConsulta(incidentes:Bool, accidentes:Bool,_ dateTextFieldInicial:String,_ dateTextFieldFinal:String) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        // Add Predicates
+        let predicate1 = NSPredicate(format: "accidenteIncidente == 1")
+        let predicate2 = NSPredicate(format: "accidenteIncidente == 2")
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        
+        
+        var predicates = [NSPredicate]()
+        if(incidentes){
+            predicates.append(predicate1);
+        }
+        if(accidentes){
+            predicates.append(predicate2);
+        }
+        if(dateTextFieldInicial.isEmpty){
+            var newDate = dateFormatter.date(from: dateTextFieldInicial)
+            let predicate3 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
+            predicates.append(predicate3);
+        }
+        if(dateTextFieldFinal.isEmpty){
+            var newDate = dateFormatter.date(from: dateTextFieldFinal)
+            let predicate4 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
+            predicates.append(predicate4);
+        }
+        if(predicates.isEmpty || predicates.count > 0){
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getAuxvialByIdAuxvial (_ idAuxvial:Int16) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        // Add Predicate
+        let predicate1 = NSPredicate(format: "idauxvial == %@", NSNumber(value: Int(idAuxvial)))
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1])
+
+        
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
 
 }

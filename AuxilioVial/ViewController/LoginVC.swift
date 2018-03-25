@@ -13,6 +13,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var ingresarButton: UIButton!
     @IBOutlet weak var usuatioTF: UITextField!
     @IBOutlet weak var contrasenaTF: UITextField!
+    @IBOutlet weak var btnRegistro: UIButton!
     var strings = Strings()
     var sincronizador = Sincronizador()
     var json: [String:Any]?
@@ -20,10 +21,24 @@ class LoginVC: UIViewController {
      
     
     override func viewDidLoad() {
-        //let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        //let managedObjectContext = appDelegate!.persistentContainer.viewContext
-        //sincronizador.managedObjectContext = appDelegate!.persistentContainer.viewContext
-        sincronizador.descargaCatalogos()
+        if(sincronizador.isCatalogosDescargados()){
+            btnRegistro.isHidden = false
+            ingresarButton.isHidden = false
+        }else{
+            btnRegistro.isHidden = true
+            ingresarButton.isHidden = true
+            if(Conexion.isConnectedToNetwork()){
+                sincronizador.descargaCatalogos()
+            }else{
+                present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_SIN_INTERNET), animated: true, completion: nil)
+            }
+            if(sincronizador.isCatalogosDescargados()){
+                btnRegistro.isHidden = false
+                ingresarButton.isHidden = false
+            }else{
+                present(alert.mostrarAlertaSencilla(titulo : strings.MENSAJE_SIN_ACCESO_SERVIDOR, mensaje : strings.MENSAJE_SIN_CATALOGOS), animated: true, completion: nil)
+            }
+        }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -34,31 +49,35 @@ class LoginVC: UIViewController {
     }
 
     @IBAction func btnIngresar(_ sender: UIButton) {
-        //Se guarda en constantes las credenciales escritas desde el formulario
-        let usuario: String? = usuatioTF.text
-        let contrasena: String? = contrasenaTF.text
-        if usuario!.isEmpty || contrasena!.isEmpty {//Se valida que ambos campos tengan algun texto
-            /*let alerta = UIAlertController(title: strings.titulo_error_validacion, message: strings.mensaje_capture_credenciales, preferredStyle: .alert)
-            let cancelar = UIAlertAction(title: "Aceptar", style: .default){
-                (action: UIAlertAction) -> Void in }
-            alerta.addAction(cancelar)*/
-            present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_CAPTURE_CREDENCIALES), animated: true, completion: nil)
-            //print("Usuario o contraseña invalida!")//crear popup
-        }else if self.sincronizador.existeUsuarioAlmacenado(usuario!){
-            print ("Login local")
-            //CODIGO DEL LOGIN LOCAL, REVISANDO USSUARIOS REGITRADOS PREVIAMENTE EN EL ARCHIVO DEFAULT
-            if self.sincronizador.loginLocal(correo: usuario!, password: contrasena!) {
-                self.performSegue(withIdentifier: "pantallaTableroSegue", sender: "")
-            }else{
-                print ("Login Invalido")
-                //popup
+        if(sincronizador.isCatalogosDescargados()){
+            //Se guarda en constantes las credenciales escritas desde el formulario
+            let usuario: String? = usuatioTF.text
+            let contrasena: String? = contrasenaTF.text
+            if usuario!.isEmpty || contrasena!.isEmpty {//Se valida que ambos campos tengan algun texto
+                /*let alerta = UIAlertController(title: strings.titulo_error_validacion, message: strings.mensaje_capture_credenciales, preferredStyle: .alert)
+                let cancelar = UIAlertAction(title: "Aceptar", style: .default){
+                    (action: UIAlertAction) -> Void in }
+                alerta.addAction(cancelar)*/
+                present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_CAPTURE_CREDENCIALES), animated: true, completion: nil)
+                //print("Usuario o contraseña invalida!")//crear popup
+            }else if self.sincronizador.existeUsuarioAlmacenado(usuario!){
+                print ("Login local")
+                //CODIGO DEL LOGIN LOCAL, REVISANDO USSUARIOS REGITRADOS PREVIAMENTE EN EL ARCHIVO DEFAULT
+                if self.sincronizador.loginLocal(correo: usuario!, password: contrasena!) {
+                    self.performSegue(withIdentifier: "pantallaTableroSegue", sender: "")
+                }else{
+                    print ("Login Invalido")
+                    //popup
+                }
+            }else if self.sincronizador.existeOtroUsuarioAlmacenado(diferente:usuario!){
+                if logueoServidor(usuario!, contrasena!){//logeo mediante el servidor
+                    //Unicamente actualizo las carreteras y tramos del nuevo usuario
+                }
+            }else {
+                logueoServidor(usuario!, contrasena!)
             }
-        }else if self.sincronizador.existeOtroUsuarioAlmacenado(diferente:usuario!){
-            if logueoServidor(usuario!, contrasena!){//logeo mediante el servidor
-                //Unicamente actualizo las carreteras y tramos del nuevo usuario
-            }
-        }else {
-            logueoServidor(usuario!, contrasena!)
+        }else{
+            present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_SIN_CATALOGOS), animated: true, completion: nil)
         }
     }
     

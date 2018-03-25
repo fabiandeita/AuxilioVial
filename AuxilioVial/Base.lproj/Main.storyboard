@@ -164,6 +164,9 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iK-ht-GV2">
                                 <rect key="frame" x="151" y="585" width="73" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <state key="normal" title="REGISTRO"/>
                                 <connections>
                                     <segue destination="zhC-6h-Xes" kind="show" id="mwt-0c-h77"/>
@@ -268,6 +271,7 @@
                         <barButtonItem key="backBarButtonItem" title="Salir" id="JS2-la-2xD"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnRegistro" destination="0iK-ht-GV2" id="fu1-LI-Cyp"/>
                         <outlet property="contrasenaTF" destination="Kjx-lC-J6M" id="SVi-9z-2WU"/>
                         <outlet property="ingresarButton" destination="3rv-cC-amf" id="j9h-Qd-Ogx"/>
                         <outlet property="usuatioTF" destination="Ohl-Tn-yau" id="nIj-vV-NQl"/>
@@ -805,15 +809,10 @@
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="4VV-hb-CQC" firstAttribute="top" secondItem="dKm-vc-Jno" secondAttribute="bottom" id="AmA-sP-3Fp"/>
-                                            <constraint firstItem="dKm-vc-Jno" firstAttribute="leading" secondItem="ved-Mz-AcJ" secondAttribute="leading" constant="7" id="EOG-nT-xzN"/>
                                             <constraint firstItem="dKm-vc-Jno" firstAttribute="top" secondItem="ved-Mz-AcJ" secondAttribute="top" id="HjC-HN-dpY"/>
-                                            <constraint firstAttribute="trailing" secondItem="4VV-hb-CQC" secondAttribute="trailing" constant="7" id="QZC-gd-1uT"/>
                                             <constraint firstItem="dKm-vc-Jno" firstAttribute="leading" secondItem="ved-Mz-AcJ" secondAttribute="leading" id="Xp2-la-R4c"/>
-                                            <constraint firstItem="4VV-hb-CQC" firstAttribute="leading" secondItem="ved-Mz-AcJ" secondAttribute="leading" constant="7" id="bgc-Nl-1zw"/>
                                             <constraint firstAttribute="bottom" secondItem="4VV-hb-CQC" secondAttribute="bottom" id="nmE-ew-7MY"/>
                                             <constraint firstAttribute="trailing" secondItem="4VV-hb-CQC" secondAttribute="trailing" id="qmR-Gk-XCo"/>
-                                            <constraint firstAttribute="trailing" secondItem="dKm-vc-Jno" secondAttribute="trailing" constant="7" id="vRL-Yw-Z7T"/>
                                             <constraint firstItem="4VV-hb-CQC" firstAttribute="leading" secondItem="ved-Mz-AcJ" secondAttribute="leading" id="w09-0r-nVS"/>
                                             <constraint firstItem="4VV-hb-CQC" firstAttribute="top" secondItem="dKm-vc-Jno" secondAttribute="bottom" id="yhQ-SV-KGT"/>
                                             <constraint firstAttribute="trailing" secondItem="dKm-vc-Jno" secondAttribute="trailing" id="zsA-p9-i7z"/>
@@ -851,12 +850,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-sq-nGO">
                                         <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
                                         <state key="normal" title="BUSCAR"/>
+                                        <connections>
+                                            <action selector="Busqueda:" destination="I0e-lZ-siJ" eventType="touchUpInside" id="xQC-PP-Cs5"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-0u-n0e">
                                         <rect key="frame" x="66" y="0.0" width="217.5" height="30"/>
                                         <state key="normal" title="DESCARGAR DEL SERVIDOR"/>
                                         <connections>
-                                            <action selector="descargarServidor:" destination="I0e-lZ-siJ" eventType="touchUpInside" id="1pC-ew-v8u"/>
+                                            <action selector="descargarServidor:" destination="I0e-lZ-siJ" eventType="touchUpInside" id="vP3-1W-tQP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5K-cN-l9m">

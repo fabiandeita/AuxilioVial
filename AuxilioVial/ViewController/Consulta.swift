@@ -17,19 +17,26 @@ class Consulta: UIViewController {
     
     var formatter:DateFormatter? = nil
     
-    @IBAction func buscar(_ sender: Any) {
+    @IBAction func Busqueda(_ sender: Any) {
+        
+        let aux:AuxilioVialDAO = AuxilioVialDAO()
+        let listaAux = aux.getAuxiliovialConsulta(incidentes: incidentesUISwitch.isEnabled, accidentes: accidentesUISwitch.isEnabled, dateTextFieldInicial.text!,dateTextFieldFinal.text!)
+        print ("Auxvial size: \(listaAux?.count)")
     }
     
     @IBAction func descargarServidor(_ sender: Any) {
+        let  sincronizador:Sincronizador = Sincronizador()
+        sincronizador.descargaAuxvialByEntidad(18)
         
     }
+    
     @IBAction func verMapa(_ sender: Any) {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         inicializaDatePickers()
-        incidentesUISwitch.setOn(false, animated: true)
-        accidentesUISwitch.setOn(false, animated: true)
+        //incidentesUISwitch.setOn(false, animated: true)
+        //accidentesUISwitch.setOn(false, animated: true)
         
         // Do any additional setup after loading the view.
     }

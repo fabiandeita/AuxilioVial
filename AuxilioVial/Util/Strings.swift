@@ -11,8 +11,10 @@ class Strings {
     let MENSAJE_CAPTURE_CREDENCIALES: String = "Escriba el usuario y la contraseña."
     let MENSAJE_COINCIDENCIA_CONTRASENAS: String = "Las contraseñas no coinciden."
     let MENSAJE_CAPTURE_CAMPOS: String = "Capture todos los campos."
-    let MENSAJE_SIN_ACCESO_SERVIDOR: String = "Los catálogos no se han descargado, conectese a internet y reinicie la aplicación."
+    let MENSAJE_SIN_ACCESO_SERVIDOR: String = "Los servidores no estan disponibles actualmente, intente màs tarde."
+    let MENSAJE_SIN_CATALOGOS: String = "Los catálogos no se han descargado, conectese a internet y reinicie la aplicación."
 
+    let MENSAJE_NTERNET_NECESARIO: String = "Conectate a internet y vuelve a iniciar la aplicación."
     let MENSAJE_SINCRONIZAR_CATALOGO: String = "No hay conexión con el servidor, intente más tarde."
     let MENSAJE_REGISTRO_EXITOSO = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
     let MENSAJE_REGISTRO_FALLIDO: String = "Intentelo más tarde"
@@ -62,7 +64,7 @@ class Strings {
     let SERVICE_POST_TIPO_ESPECIFICO: String = "/service/catalog/tipoEsp" //idtipo
     let SERVICE_POST_TRAMO: String = "/service/catalog/tramo" //idcarretera
     
-    
+    let SERVICE_POST_AUXVIAL: String = "/service/query/auxvialByEntidad" //idclase
     
     
 }
