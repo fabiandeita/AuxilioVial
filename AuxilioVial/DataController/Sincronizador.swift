@@ -20,9 +20,9 @@ class Sincronizador {
     init() {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
-    }
+    }   
     //Sincroniza la parte del usuario, localmente, almacenandolo por primera vez, para evitar loguearse siempre usando la web
-    func asignarUsuario(_ json: [String:Any]) -> Bool{
+    func asignarUsuario(_ json: [String:Any],_ controlador:UIViewController) -> Bool{
         do{
             let usuario = json["usuario"] as! String
             let contrasena = json["contrasena"] as! String
@@ -40,7 +40,7 @@ class Sincronizador {
             if UserDefaults.standard.integer(forKey: "idEntidad") != idEntidad {
                 print ("Descargando catálogo Carretera")
                 UserDefaults.standard.set(idEntidad, forKey: "idEntidad")
-                descargaCarreteras()
+                descargaCarreteras(controlador)
             }
             UserDefaults.standard.set(idEntidad, forKey: "idEntidad")
         }catch{
@@ -84,29 +84,30 @@ class Sincronizador {
     }
     //Descarga de catálogos
     
-    func descargaCatalogos () -> Bool{
+    func descargaCatalogos (_ controlador:UIViewController) -> Bool{
         //el metodo isCatalogoDescargado devuelve true o false, si ya existe en los defaults del usuario, el nombre de algun catalogo descargado. el siguiente IF se repite para cada catalogo, solo se cambia el tipo de entidad a sincronizar
+        var respuesta:String
         if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
-            if(!descargaEntidadesFederativas()){
-                return false
+            if !descargaEntidadesFederativas(controlador){
+                return false;
             }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "OrienVisib"){
-            if(!descargaOrigenVisible()){
-                return false
+            if !descargaOrigenVisible(controlador){
+                return false;
             }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Lado"){
-            if(!descargaLado()){
-                return false
+            if !descargaLado(controlador){
+                return false;
             }
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Clase"){
-            if(!descargaClase()){
-                return false
+            if !descargaClase(controlador){
+                return false;
             }
         }
         
@@ -115,8 +116,8 @@ class Sincronizador {
         }
         
         if !isCatalogoDescargado(estaAlmacenado: "Cuerpo"){
-            if(!descargaCuerpo()){
-                return false
+            if !descargaCuerpo(controlador){
+                return false;
             }
         }
         
@@ -127,10 +128,9 @@ class Sincronizador {
         if !isCatalogoDescargado(estaAlmacenado: "SubTipo"){
             //descargaSubTipos()
         }
-        
         var localizacion:Localizacion?
         localizacion = Localizacion()
-        return false
+        return true
     }
     
     func isCatalogosDescargados () -> Bool{
@@ -168,6 +168,8 @@ class Sincronizador {
         }
         return true
     }
+    
+    
     
     
     func descargaAuxvialByEntidad(_ entidadId:Int){
@@ -426,13 +428,15 @@ class Sincronizador {
         
     }
    
-    func descargaClase () ->  Bool{
+    func descargaClase (_ controlador:UIViewController) ->  Bool{
         var exito = false
         let urlServicioClase = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CLASE)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioClase!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta de CLASE")
+                controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
+                
             }else{
                 do{
                     //Casteamos el resultado a un diccionario, para despues recorrerlo
@@ -456,10 +460,12 @@ class Sincronizador {
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Clase")
                         fatalError("Failure to save context in Clase, with error: \(error)")
+                        exito = false
                     }
                 }catch{
                     print("error: ")
                     print(error)
+                    exito = false
                 }
             }
             
@@ -469,12 +475,15 @@ class Sincronizador {
     }
     
     
-    func descargaLado ()-> Bool {
-        var exito=false
+    func descargaLado (_ controlador:UIViewController)-> Bool {
+        var resultado = false
+        
         let urlServicioLado = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_LADO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioLado!){
             (datos, respuesta, error) in
             if error != nil {
+                resultado = false
+                controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
                 print ("Error en la consulta de Lado")
             }else{
                 do{
@@ -491,29 +500,33 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         print("Lados sincronizados")
                         UserDefaults.standard.set(true, forKey: "Lado")
-                        exito=true
+                        resultado = true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Lado")
                         fatalError("Failure to save context in Lado, with error: \(error)")
+                        resultado = false
                     }
                 }catch{
                     print("error: ")
-                    print(error)
+                    print(error.localizedDescription)
+                    resultado = false
                 }
             }
             
         }
         tarea.resume()
-        return exito
+        return resultado
     }
     
-    func descargaCuerpo ()-> Bool {
+    func descargaCuerpo (_ controlador:UIViewController)-> Bool {
         var exito = false
         let urlServicioCuerpo = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CUERPO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioCuerpo!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta de Cuerpo")
+                controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
+                
             }else{
                 do{
                     //Casteamos el resultado a un diccionario, para despues recorrerlo
@@ -529,15 +542,18 @@ class Sincronizador {
                     do {
                         try self.managedObjectContext.save()
                         print("Cuerpo sincronizados")
-                        UserDefaults.standard.set(true, forKey: "Cuerpo")
+                        UserDefaults.standard.set(exito, forKey: "Cuerpo")
                         exito=true
+                        
                     } catch {
-                        UserDefaults.standard.set(false, forKey: "Cuerpo")
+                        UserDefaults.standard.set(exito, forKey: "Cuerpo")
                         fatalError("Failure to save context in Cuerpo, with error: \(error)")
+                        exito = false
                     }
                 }catch{
                     print("error: ")
                     print(error)
+                    exito = false
                 }
             }
             
@@ -551,13 +567,14 @@ class Sincronizador {
            
     }
     
-    func descargaOrigenVisible () ->Bool{
+    func descargaOrigenVisible (_ controlador:UIViewController) ->Bool{
         var exito = false;
         let urlServicioOrigenVisib = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ORIENVISIB)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioOrigenVisib!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta del origen")
+                controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
             }else{
                 do{
                     let origenesVisibles = try JSONSerialization.jsonObject(with: datos! , options:
@@ -572,33 +589,38 @@ class Sincronizador {
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        UserDefaults.standard.set(true, forKey: "OrienVisib")
+                        exito = true
+                        UserDefaults.standard.set(exito, forKey: "OrienVisib")
                         print("OrienVisib sincronizados")
-                        return true;
                     } catch {
-                        UserDefaults.standard.set(false, forKey: "OrienVisib")
+                        exito = false
+                        UserDefaults.standard.set(exito, forKey: "OrienVisib")
                         fatalError("Failure to save context in OrigenVisible, with error: \(error)")
                     }
                 }catch{
                     print("error: ")
                     print(error)
+                    exito = false
+                    UserDefaults.standard.set(exito, forKey: "OrienVisib")
                 }
             }
-            
         }
         tarea.resume()
         return exito;
     }
     
     
-    func descargaEntidadesFederativas () -> Bool{
-        var exito = false
+    func descargaEntidadesFederativas (_ controlador:UIViewController) -> Bool{
+        var resultado = false
         let urlServicioEntidades = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ENTIDADFEDERATIVA)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioEntidades!){
             (datos, respuesta, error) in
             if error != nil {
                 print ("Error en la consulta de las entidades")
-                exito =  false
+                let resultadoS = (error?.localizedDescription)!
+                controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
+                
+                resultado = false
             }else{
                 do{
                     let entidades = try JSONSerialization.jsonObject(with: datos! , options:
@@ -614,24 +636,24 @@ class Sincronizador {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(true, forKey: "EntidadFederativa")
                         print("EntidadFederativa sincronizados")
-                        exito =  true
+                        resultado = true
                     } catch {
                         UserDefaults.standard.set(false, forKey: "EntidadFederativa")
                         fatalError("Failure to save context in Entidades Federativas, with error: \(error)")
-                        exito =  false
+                        resultado = false
                     }
                 }catch{
                     print(error)
-                    exito =  false
+                    resultado = false
                 }
             }
         }
         tarea.resume()
-        
-        return exito
+        return resultado
     }
     
-    func descargaCarreteras () -> Bool{
+    func descargaCarreteras (_ controlador:UIViewController) -> Bool{
+        var resultado = false
         let urlServicioCarreteras = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_CARRETERA)"
         let objetoURL  = URL(string:urlServicioCarreteras)//Se crea la url del servicio
         print ("Se descargaran carreteras")
@@ -652,6 +674,8 @@ class Sincronizador {
                 if error != nil {
                     print ("Error en la consulta de las carreteras \(error!)")
                     print ("Respuesta: \(String(describing: respuesta))")
+                    resultado = false
+                    controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
                 }else{
                     do{//se convierte la respuesta del servicio en un json
                         let carreteras = try JSONSerialization.jsonObject(with: datos! , options:
@@ -681,22 +705,26 @@ class Sincronizador {
                         // Save
                         do {
                             try self.managedObjectContext.save()
+                            UserDefaults.standard.set(true, forKey: "Tramo")
+                            resultado = true
                         } catch {
                             UserDefaults.standard.set(false, forKey: "Carretera")
                             fatalError("Failure to save context in Carretera, with error: \(error)")
+                            resultado = false
                         }
                         
                     }catch {
                         print("El Procesamiento del JSON tuvo un error \(error)")
-                        //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
+                        resultado = false
                     }
                 }
             }
             task.resume()
         }catch {
             print("Error casteando la respuesta")
+            resultado = false
         }
-        return true
+        return resultado
     }
     
     func descargaTramo (_ urlServicioTramos:String, _ idCarretera:NSNumber) -> Bool{

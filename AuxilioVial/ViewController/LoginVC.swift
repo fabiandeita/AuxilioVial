@@ -27,17 +27,8 @@ class LoginVC: UIViewController {
         }else{
             btnRegistro.isHidden = true
             ingresarButton.isHidden = true
-            if(Conexion.isConnectedToNetwork()){
-                sincronizador.descargaCatalogos()
-            }else{
-                present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_SIN_INTERNET), animated: true, completion: nil)
-            }
-            if(sincronizador.isCatalogosDescargados()){
-                btnRegistro.isHidden = false
-                ingresarButton.isHidden = false
-            }else{
-                present(alert.mostrarAlertaSencilla(titulo : strings.MENSAJE_SIN_ACCESO_SERVIDOR, mensaje : strings.MENSAJE_SIN_CATALOGOS), animated: true, completion: nil)
-            }
+            sincronizador.descargaCatalogos(self)
+                
         }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -82,7 +73,7 @@ class LoginVC: UIViewController {
     }
     
     func actualizarUsuarioDefault(_ json: [String:Any]) -> Bool{
-        self.sincronizador.asignarUsuario(json)
+        self.sincronizador.asignarUsuario(json, self)
         print("Se agrega usuario al Default")
         return true
     }

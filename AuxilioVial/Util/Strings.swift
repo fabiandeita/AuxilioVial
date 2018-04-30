@@ -13,6 +13,7 @@ class Strings {
     let MENSAJE_CAPTURE_CAMPOS: String = "Capture todos los campos."
     let MENSAJE_SIN_ACCESO_SERVIDOR: String = "Los servidores no estan disponibles actualmente, intente màs tarde."
     let MENSAJE_SIN_CATALOGOS: String = "Los catálogos no se han descargado, conectese a internet y reinicie la aplicación."
+    let MENSAJE_SIN_CATALOGOS_SIN_INTERNET: String = "Servidores no disponibles para la descarga de los catálogos."
 
     let MENSAJE_NTERNET_NECESARIO: String = "Conectate a internet y vuelve a iniciar la aplicación."
     let MENSAJE_SINCRONIZAR_CATALOGO: String = "No hay conexión con el servidor, intente más tarde."
