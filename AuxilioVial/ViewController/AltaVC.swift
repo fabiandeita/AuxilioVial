@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 import AVFoundation
-
-class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+import CoreLocation
+class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate{
     
     @IBOutlet weak var entidadPickerView: UIPickerView!
     @IBOutlet weak var carreteraPickerView: UIPickerView!
@@ -22,6 +23,7 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     @IBOutlet weak var ladoPickerView: UIPickerView!
     @IBOutlet weak var orienVisibPickerView: UIPickerView!
     
+    @IBOutlet weak var scroll: UIScrollView!
     
     @IBOutlet weak var latitudTF: UITextField!
     @IBOutlet weak var longitudTF: UITextField!
@@ -74,57 +76,93 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     var urlServicioRegistro:String = ""
     var idEntidadFederativaUsuario: NSNumber = 0
     var auxilio : Auxvial?
+    var listaImage: Array<UIImage>?
+    let locationMannager = CLLocationManager()
     
-    @IBAction func tomarFoto(_ sender: Any) {
-        
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary){
-            let image = UIImagePickerControllerSourceType.photoLibrary
-            print("Accedio a la library")
-        }else{
-            print("No accedio a la library")
-        }
-        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
-            if granted {
-                DispatchQueue.main.async {
-                    UIImagePickerControllerSourceType.camera 
-                }
-            }
-        })
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
-            let image = UIImagePickerControllerSourceType.camera
-        }else{
-            print("No accedio a la camara")
-        }
+    
+    
+    func poblarAuxilio(){
+        auxilio?.idClase = (clase?.idClase)!
+        auxilio?.idCuerpo = (cuerpo?.idCuerpo)!
+        auxilio?.idTipoEsp = (tipoEsp?.idtipoEsp)!
+        auxilio?.idSubtipo = (subTipo?.idSubtipo)!
+        auxilio?.idLado = (lado?.idLado)!
+        auxilio?.idTramo = (tramo?.idTramo)!
+        auxilio?.idOrienVisible = (orienVisib?.idOrienVisib)!
+        auxilio?.descripcion = (descripcionTF.text)!
+        print("descripcion 1: \(auxilio?.descripcion ?? "")")
+        print("descripcion 2: \((descripcionTF.text)!)")
+        auxilio?.kmInicio = (kmInicialTF.text)!
+        auxilio?.kmFinal = (kmFinalTF.text)!
+        auxilio?.fuenteInf = (informacionTF.text)!
+        auxilio?.residenteVial = (vialidadTF.text)!
+        auxilio?.lesionados = Int16(lesionadosTF.text!)!
+        auxilio?.muertos = Int16(muertosTF.text!)!
+        auxilio?.vehiculo = (vehiculoTF.text)!
+        auxilio?.vehiculosInvolucrados = (vehiculosInvolucradosTF.text)!
+        auxilio?.danioCamino = (danioCaminoTF.text)!
+        auxilio?.tiempoRespuesta = (respuestaTF.text)!
+        auxilio?.observaciones = (actuacionesTF.text)!
     }
     
+    @IBAction func regresar(_ sender: Any) {
+        self.performSegue(withIdentifier: "regresarPrincipal", sender: "")
+    }
+    
+    @IBAction func addImage(_ sender: Any) {
+        self.performSegue(withIdentifier: "captacionToImagenesSegue", sender: auxilio)
+        //prepare(for:   "ImagenesToCaptacionSegue", sender: listaImage)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imageVC = segue.destination as? ImageViewController {
+            poblarAuxilio()
+            imageVC.auxilio = auxilio
+            //print("descripcion: \(auxilio.descripcion)")
+            if listaImage != nil{
+                imageVC.listaImage = listaImage!
+            }
+        }
+    }
     
     @IBAction func guardarBtn(_ sender: Any) {
         if validacionFormulario(){
             //Implementas el guardado
-            auxilio?.idCuerpo = (cuerpo?.idCuerpo)!
-            auxilio?.idTipoEsp = (tipoEsp?.idtipoEsp)!
-            auxilio?.idSubtipo = (subTipo?.idSubtipo)!
-            auxilio?.idLado = (lado?.idLado)!
-            auxilio?.idTramo = (tramo?.idTramo)!
-            auxilio?.idOrienVisible = (orienVisib?.idOrienVisib)!
-            auxilio?.descripcion = (descripcionTF.text)!
-            auxilio?.kmInicio = (kmInicialTF.text)!
-            auxilio?.kmFinal = (kmFinalTF.text)!
-            auxilio?.fuenteInf = (informacionTF.text)!
-            auxilio?.residenteVial = (vialidadTF.text)!
-            auxilio?.lesionados = (lesionadosTF.text)!
-            auxilio?.muertos = (muertosTF.text)!
-            auxilio?.vehiculo = (vehiculoTF.text)!
-            auxilio?.vehiculosInvolucrados = (vehiculosInvolucradosTF.text)!
-            auxilio?.danioCamino = (danioCaminoTF.text)!
-            auxilio?.tiempoRespuesta = (respuestaTF.text)!
-            auxilio?.observaciones = (actuacionesTF.text)!
+            // Save
+            do {
+                var managedObjectContext: NSManagedObjectContext!
+                var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                managedObjectContext = appDelegate.persistentContainer.viewContext
             
+                let entityAuxvial = NSEntityDescription.entity(forEntityName: "Auxvial", in: managedObjectContext)!
+                auxilio = Auxvial(entity: entityAuxvial, insertInto: managedObjectContext)
+                
+                poblarAuxilio()
+                
+                try managedObjectContext.save()
+                
+                let entityImage = NSEntityDescription.entity(forEntityName: "Image", in: managedObjectContext)!
+                for image in listaImage!{
+                    let imageTemp = Image(entity: entityImage, insertInto: managedObjectContext)
+                    imageTemp.value = "imagen fff \(image.size)"
+                    imageTemp.auxvial = auxilio
+                    try managedObjectContext.save()
+                }
+                present(alert.mostrarAlertaInserccion(titulo : strings.TITULO_REGISTRO_EXITOSO, mensaje : strings.MSG_EXITO_ALTA, alta: self), animated: true, completion: nil)
+                
+                print("Auxvial insertado")
+                print("ID Asignado: \(auxilio?.idauxvial)"  )
+            } catch {
+                fatalError("Failure to save context in Auxvial, with error: \(error)")
+            }
         }
     }
     
     func validacionFormulario() -> Bool{
+        if(listaImage == nil || (listaImage?.isEmpty)!){
+            present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_POR_FAVOR, mensaje : strings.MENSAJE_IMAGENES), animated: true, completion: nil)
+            return false
+        }
         
         if (descripcionTF.text?.isEmpty)!{
             present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_POR_FAVOR, mensaje : strings.MENSAJE_DESCRIPCION), animated: true, completion: nil)
@@ -322,6 +360,8 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         idEntidadFederativaUsuario = sincronizador.getIdEntidadFederativa() as NSNumber
         // Do any additional setup after loading the view.
         loadEntidades()
@@ -329,10 +369,37 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         loadLado()
         loadOrienVisib()
         loadCuerpo()
-        var localizacion:Localizacion?
-        localizacion = Localizacion()
-        guardarBoton.isEnabled = false
-        super.viewDidLoad()
+        
+        locationMannager.delegate = self
+        locationMannager.desiredAccuracy = kCLLocationAccuracyBest
+        locationMannager.requestWhenInUseAuthorization()
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        
+        locationMannager.startUpdatingLocation()
+        
+        testFaster()
+    }
+    
+    func testFaster(){
+        descripcionTF.text = "Choque"
+        kmInicialTF.text = "0.0"
+        kmFinalTF.text = "0.0"
+        informacionTF.text = "información"
+        lesionadosTF.text = "1"
+        muertosTF.text = "0"
+        vehiculoTF.text = "Camioneta Ford"
+        vehiculosInvolucradosTF.text = "3"
+        danioCaminoTF.text = "Asfalto"
+        vialidadTF.text = "Fabian De Ita"
+        respuestaTF.text = "11:22 horas"
+        actuacionesTF.text = "Gruas y señalamiento"
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //print("lat: ", locations[0].coordinate.latitude, " long: ", locations[0].coordinate.longitude, " Alt: ", locations[0].altitude)
+        latitudTF.text = locations[0].coordinate.latitude.description
+        longitudTF.text = locations[0].coordinate.longitude.description
+        altitudTF.text = locations[0].altitude.description
     }
     
     func loadSubTipo(papa clase:Clase){
@@ -547,6 +614,8 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     }
     
 
+    
+    
     /*
     // MARK: - Navigation
 

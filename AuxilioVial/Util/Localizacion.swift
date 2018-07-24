@@ -17,6 +17,8 @@ class Localizacion: NSObject, CLLocationManagerDelegate{
         super.init()
         locationManager = CLLocationManager()
         locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
     }

@@ -13,7 +13,7 @@ import CoreData
 
 extension Clase {
 
-    @NSManaged var idClase: NSNumber
+    @NSManaged var idClase: Int16
     @NSManaged var nombre: String?
 
 }

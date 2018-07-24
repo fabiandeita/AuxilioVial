@@ -1,5 +1,5 @@
 //
-//  Auxvial+CoreDataClass.swift
+//  Image+CoreDataClass.swift
 //  AuxilioVial
 //
 //  Created by Fabian on 06/05/18.
@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 
-public class Auxvial: NSManagedObject {
+public class Image: NSManagedObject {
 
 }

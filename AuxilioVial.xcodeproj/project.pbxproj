@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		1C0F5CCB201A576A005AE8F1 /* Mensajes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C0F5CCD201A576A005AE8F1 /* Mensajes.strings */; };
 		1C166AE4200C4A1A000AD883 /* AuxilioVial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C166AE2200C4A1A000AD883 /* AuxilioVial.xcdatamodeld */; };
-		1C1ABBE420430AB100A7DE2E /* Auxvial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1ABBE320430AB100A7DE2E /* Auxvial.swift */; };
 		1C1D8C7F2043C67D002A0CE1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D8C7E2043C67D002A0CE1 /* ImageViewController.swift */; };
 		1C1D8C812047A8E0002A0CE1 /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D8C802047A8E0002A0CE1 /* Conexion.swift */; };
 		1C20D15D203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C20D15B203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift */; };
 		1C20D15E203017BD00D0AB8D /* OrienVisib+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C20D15C203017BD00D0AB8D /* OrienVisib+CoreDataProperties.swift */; };
-		1C20D1622038B3D500D0AB8D /* Auxvial+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C20D1602038B3D500D0AB8D /* Auxvial+CoreDataProperties.swift */; };
 		1C20D1642038BA9900D0AB8D /* AuxilioVialDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C20D1632038BA9900D0AB8D /* AuxilioVialDAO.swift */; };
 		1C20D1662038C4F000D0AB8D /* SincronizadorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C20D1652038C4F000D0AB8D /* SincronizadorVC.swift */; };
 		1C50A7CD2026284F00123E5A /* AltaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C50A7CC2026284F00123E5A /* AltaVC.swift */; };
@@ -48,17 +46,23 @@
 		1CE6CBE72012F7840072EA1B /* Tipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */; };
 		1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDA2012F7840072EA1B /* SubTipo.swift */; };
 		1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */; };
+		1F853525209FA2BA002307C6 /* Auxvial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F853521209FA2BA002307C6 /* Auxvial.swift */; };
+		1F853526209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F853522209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift */; };
+		1F853527209FA2BA002307C6 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F853523209FA2BA002307C6 /* Image.swift */; };
+		1F853528209FA2BA002307C6 /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F853524209FA2BA002307C6 /* Image+CoreDataProperties.swift */; };
+		1FC3555D20979B22002BE8CE /* InicioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3555C20979B22002BE8CE /* InicioVC.swift */; };
+		1FC3555F2098EEB5002BE8CE /* Navegacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3555E2098EEB5002BE8CE /* Navegacion.swift */; };
+		1FC3556320994A35002BE8CE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3556220994A35002BE8CE /* CollectionViewCell.swift */; };
+		1FC3556720994E58002BE8CE /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3556620994E58002BE8CE /* CollectionViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C0F5CCC201A576A005AE8F1 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Mensajes.strings; sourceTree = "<group>"; };
 		1C166AE3200C4A1A000AD883 /* AuxilioVialModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AuxilioVialModel.xcdatamodel; sourceTree = "<group>"; };
-		1C1ABBE320430AB100A7DE2E /* Auxvial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxvial.swift; sourceTree = "<group>"; };
 		1C1D8C7E2043C67D002A0CE1 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		1C1D8C802047A8E0002A0CE1 /* Conexion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
 		1C20D15B203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrienVisib+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1C20D15C203017BD00D0AB8D /* OrienVisib+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrienVisib+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1C20D1602038B3D500D0AB8D /* Auxvial+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auxvial+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C20D1632038BA9900D0AB8D /* AuxilioVialDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuxilioVialDAO.swift; sourceTree = "<group>"; };
 		1C20D1652038C4F000D0AB8D /* SincronizadorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SincronizadorVC.swift; sourceTree = "<group>"; };
 		1C50A7CC2026284F00123E5A /* AltaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltaVC.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 		1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CE6CBDA2012F7840072EA1B /* SubTipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTipo.swift; sourceTree = "<group>"; };
 		1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F853521209FA2BA002307C6 /* Auxvial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxvial.swift; sourceTree = "<group>"; };
+		1F853522209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Auxvial+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1F853523209FA2BA002307C6 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		1F853524209FA2BA002307C6 /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FC3555C20979B22002BE8CE /* InicioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioVC.swift; sourceTree = "<group>"; };
+		1FC3555E2098EEB5002BE8CE /* Navegacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navegacion.swift; sourceTree = "<group>"; };
+		1FC3556220994A35002BE8CE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = DataController/CollectionViewCell.swift; sourceTree = "<group>"; };
+		1FC3556620994E58002BE8CE /* CollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +123,10 @@
 		1C616255200B1CB60087A859 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C1ABBE320430AB100A7DE2E /* Auxvial.swift */,
-				1C20D1602038B3D500D0AB8D /* Auxvial+CoreDataProperties.swift */,
+				1F853521209FA2BA002307C6 /* Auxvial.swift */,
+				1F853522209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift */,
+				1F853523209FA2BA002307C6 /* Image.swift */,
+				1F853524209FA2BA002307C6 /* Image+CoreDataProperties.swift */,
 				1CE6CBD42012F7840072EA1B /* TipoEsp.swift */,
 				1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */,
 				1CE6CBD82012F7840072EA1B /* Tipo.swift */,
@@ -142,6 +156,7 @@
 			children = (
 				1C616257200B1D960087A859 /* Sincronizador.swift */,
 				1C20D1632038BA9900D0AB8D /* AuxilioVialDAO.swift */,
+				1FC3556620994E58002BE8CE /* CollectionViewCells.swift */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -153,6 +168,7 @@
 				1CE6CBC2201013220072EA1B /* Alert.swift */,
 				1CDC33F4203D3D3600DA0E67 /* Localizacion.swift */,
 				1C1D8C802047A8E0002A0CE1 /* Conexion.swift */,
+				1FC3555E2098EEB5002BE8CE /* Navegacion.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -183,6 +199,7 @@
 				1C8202662002ED3700A96668 /* ViewController */,
 				1C8202541FF04BCF00A96668 /* AppDelegate.swift */,
 				1C8202581FF04BCF00A96668 /* Main.storyboard */,
+				1FC3556220994A35002BE8CE /* CollectionViewCell.swift */,
 				1C0F5CCD201A576A005AE8F1 /* Mensajes.strings */,
 				1C82025B1FF04BCF00A96668 /* Assets.xcassets */,
 				1C82025D1FF04BCF00A96668 /* LaunchScreen.storyboard */,
@@ -202,6 +219,7 @@
 				1C20D1652038C4F000D0AB8D /* SincronizadorVC.swift */,
 				1C1D8C7E2043C67D002A0CE1 /* ImageViewController.swift */,
 				1CA8A1CC2060555F00711EEA /* Consulta.swift */,
+				1FC3555C20979B22002BE8CE /* InicioVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -297,10 +315,13 @@
 				1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */,
 				1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */,
 				1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */,
+				1FC3555D20979B22002BE8CE /* InicioVC.swift in Sources */,
 				1CE6CBE32012F7840072EA1B /* TipoEsp+CoreDataProperties.swift in Sources */,
+				1F853527209FA2BA002307C6 /* Image.swift in Sources */,
 				1CE6CBC7201070330072EA1B /* Carretera+CoreDataProperties.swift in Sources */,
+				1FC3556320994A35002BE8CE /* CollectionViewCell.swift in Sources */,
 				1CE6CBCC2012F5320072EA1B /* Tramo.swift in Sources */,
-				1C1ABBE420430AB100A7DE2E /* Auxvial.swift in Sources */,
+				1FC3555F2098EEB5002BE8CE /* Navegacion.swift in Sources */,
 				1C8202571FF04BCF00A96668 /* LoginVC.swift in Sources */,
 				1C20D1642038BA9900D0AB8D /* AuxilioVialDAO.swift in Sources */,
 				1CE6CBC92012A90D0072EA1B /* RegistroVC.swift in Sources */,
@@ -308,7 +329,8 @@
 				1C20D15E203017BD00D0AB8D /* OrienVisib+CoreDataProperties.swift in Sources */,
 				1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */,
 				1C1D8C7F2043C67D002A0CE1 /* ImageViewController.swift in Sources */,
-				1C20D1622038B3D500D0AB8D /* Auxvial+CoreDataProperties.swift in Sources */,
+				1F853525209FA2BA002307C6 /* Auxvial.swift in Sources */,
+				1FC3556720994E58002BE8CE /* CollectionViewCells.swift in Sources */,
 				1CE6CBE02012F7840072EA1B /* Clase.swift in Sources */,
 				1C61625B200B1EE20087A859 /* Strings.swift in Sources */,
 				1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */,
@@ -318,8 +340,10 @@
 				1CE6CB9D200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift in Sources */,
 				1C20D15D203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift in Sources */,
 				1CE6CBE62012F7840072EA1B /* Tipo.swift in Sources */,
+				1F853526209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift in Sources */,
 				1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */,
 				1C616258200B1D960087A859 /* Sincronizador.swift in Sources */,
+				1F853528209FA2BA002307C6 /* Image+CoreDataProperties.swift in Sources */,
 				1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */,
 				1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */,
 				1CA8A1CD2060555F00711EEA /* Consulta.swift in Sources */,
@@ -472,9 +496,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2R8PTN6YQ;
 				INFOPLIST_FILE = AuxilioVial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fabiandeita.AuxilioVial;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picie.AuxilioVial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -486,9 +511,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2R8PTN6YQ;
 				INFOPLIST_FILE = AuxilioVial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fabiandeita.AuxilioVial;
+				PRODUCT_BUNDLE_IDENTIFIER = com.picie.AuxilioVial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

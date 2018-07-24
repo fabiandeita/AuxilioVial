@@ -9,89 +9,72 @@
 import UIKit
 import MobileCoreServices
 
-private extension Selector {
-    static let openPickerButtonTapped = #selector(ImageViewController.openPickerButtonTapped)
-}
 
-class ImageViewController: UIViewController {
-    private lazy var openPickerButton: UIBarButtonItem = {
-        let b = UIBarButtonItem(
-            title: "Biblioteca de fotografias",
-            style: .done,
-            target: self,
-            action: .openPickerButtonTapped
-        )
-        return b
-    }()
+ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBOutlet weak var deleteImageBtn: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    private let imagePicker = UIImagePickerController()
+    @IBOutlet weak var imageView: UIImageView!
+    var listaImage: Array<UIImage> = []
+    var auxilio : Auxvial?
     
-    fileprivate lazy var imageView: UIImageView = {
-        let i = UIImageView()
-        i.translatesAutoresizingMaskIntoConstraints = false
-        i.contentMode = .scaleAspectFill
-        return i
-    }()
-    
-    fileprivate lazy var imagePicker: UIImagePickerController = {
-        let i = UIImagePickerController()
-        i.delegate = self
-        return i
-    }()
+    override var prefersStatusBarHidden: Bool{
+        return true;
+    }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.rightBarButtonItem = openPickerButton
-        view.addSubview(imageView)
-        
-        NSLayoutConstraint.activate(
-            [
-                imageView.topAnchor.constraint(equalTo: view.topAnchor),
-                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ]
-        )
+        imagePicker.delegate = self
+        deleteImageBtn.isHidden = true
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
-}
-
-
-//MARK: - Objc Functions
-extension ImageViewController {
-    @objc
-    fileprivate func openPickerButtonTapped() {
-        let sheet = UIAlertController(
-            title: "Open ImagePicker",
-            message: "Select one...",
-            preferredStyle: .actionSheet
-        )
-        sheet.addAction(UIAlertAction(title: "Rollo fotográfico", style: .default, handler: { action in
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
-        }))
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            sheet.addAction(UIAlertAction(title: "Cámara", style: .default, handler: { action in
-                self.imagePicker.sourceType = .camera
-                self.present(self.imagePicker, animated: true, completion: nil)
-            }))
+    
+    @IBAction func regresarUIButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "ImagenesToCaptacionSegue", sender: listaImage)
+        //prepare(for:   "ImagenesToCaptacionSegue", sender: listaImage)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let AltaVC = segue.destination as? AltaVC {
+            AltaVC.listaImage = listaImage
         }
-        sheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
-        present(sheet, animated: true, completion: nil)
     }
-}
-
-
-//MARK: - Image Picker Delegate
-extension ImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return listaImage.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCells
+        cell.imageView.image = listaImage[indexPath.item]
+        
+        return cell
+    }
+    
+    @IBAction func imagesFromGaleryBtn(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteImage(_ sender: Any) {
+    }
+    
+    @IBAction func imagesFromCamera(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
+        let img = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView?.image = img
+        listaImage.append(img!)
+        deleteImageBtn.isHidden = false
+        self.dismiss(animated: true, completion: nil)
+        collectionView.reloadData()
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        imageView.image = image
     }
 }
-

@@ -178,4 +178,5 @@ class RegistroVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     
+    
 }

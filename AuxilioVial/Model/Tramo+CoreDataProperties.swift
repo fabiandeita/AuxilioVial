@@ -13,7 +13,7 @@ import CoreData
 
 extension Tramo {
 
-    @NSManaged var idTramo: NSNumber
+    @NSManaged var idTramo: Int16
     @NSManaged var origen: String?
     @NSManaged var destino: String?
     @NSManaged var idCarretera: NSNumber

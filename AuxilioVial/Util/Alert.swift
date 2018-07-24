@@ -19,5 +19,17 @@ public class Alert{
     }
     
     
+    func mostrarAlertaInserccion(titulo titulo:String, mensaje mensaje:String, alta:AltaVC) -> UIViewController{
+        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+        let aceptar = UIAlertAction(title: "Aceptar", style: .default){
+            (action: UIAlertAction) -> Void in
+            
+            alta.performSegue(withIdentifier: "regresarPrincipal", sender: "")
+        }
+        alerta.addAction(aceptar)
+        return alerta;
+    }
+    
+    
     
 }

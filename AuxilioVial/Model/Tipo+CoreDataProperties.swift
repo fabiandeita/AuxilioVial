@@ -15,6 +15,6 @@ extension Tipo {
 
     @NSManaged var idTipo: NSNumber
     @NSManaged var nombre: String?
-    @NSManaged var clase: NSNumber
+    @NSManaged var clase: Int16
 
 }

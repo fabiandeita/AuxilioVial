@@ -17,6 +17,8 @@ class Sincronizador {
     var alert = Alert()
     var appDelegate:AppDelegate
     var auxvialDAO:AuxilioVialDAO = AuxilioVialDAO()
+    var inicioVC : InicioVC?
+    
     init() {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.persistentContainer.viewContext
@@ -87,12 +89,12 @@ class Sincronizador {
     func descargaCatalogos (_ controlador:UIViewController) -> Bool{
         //el metodo isCatalogoDescargado devuelve true o false, si ya existe en los defaults del usuario, el nombre de algun catalogo descargado. el siguiente IF se repite para cada catalogo, solo se cambia el tipo de entidad a sincronizar
         var respuesta:String
-        if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
-            if !descargaEntidadesFederativas(controlador){
+      /*  if !isCatalogoDescargado(estaAlmacenado: "EntidadFederativa"){
+           if !descargaEntidadesFederativas(controlador, progressView){
                 return false;
             }
         }
-        
+       
         if !isCatalogoDescargado(estaAlmacenado: "OrienVisib"){
             if !descargaOrigenVisible(controlador){
                 return false;
@@ -129,7 +131,7 @@ class Sincronizador {
             //descargaSubTipos()
         }
         var localizacion:Localizacion?
-        localizacion = Localizacion()
+        localizacion = Localizacion()*/
         return true
     }
     
@@ -211,22 +213,22 @@ class Sincronizador {
                                 auxilioVial.danioCamino = auxJson["danioCamino"]! as? String
                                 auxilioVial.descripcion = auxJson["descripcion"]! as? String
                                 auxilioVial.durEvento = auxJson["durEvento"]! as? String
-                                auxilioVial.fechaConoc = auxJson["fechaConoc"]! as? Date
-                                auxilioVial.fechacreacion = auxJson["fechacreacion"]! as? Date
+                                auxilioVial.fechaConoc = auxJson["fechaConoc"]! as? NSDate
+                                auxilioVial.fechacreacion = auxJson["fechacreacion"]! as? NSDate
                                 auxilioVial.fuenteInf = auxJson["fuenteInf"]! as? String
                                 auxilioVial.idCuerpo = auxJson["idCuerpo"]! as! Int16
                                 auxilioVial.idLado = auxJson["idLado"]! as! Int16
                                 auxilioVial.idOrienVisible = auxJson["idOrienVisible"]! as! Int16
                                 auxilioVial.idSubtipo = auxJson["idSubtipo"]! as! Int16
                                 auxilioVial.idTipoEsp = auxJson["idTipoEsp"]! as! Int16
-                                auxilioVial.idTramo = auxJson["idTramo"]! as! NSNumber
+                                auxilioVial.idTramo = auxJson["idTramo"]! as! Int16
                                 auxilioVial.idauxvial = auxJson["idauxvial"]! as! Int16
                                 auxilioVial.kmFinal = auxJson["kmFinal"]! as? String
                                 auxilioVial.kmInicio = auxJson["kmInicio"]! as? String
                                 auxilioVial.latitud = auxJson["latitud"]! as! Double
-                                auxilioVial.lesionados = auxJson["lesionados"]! as? String
+                                auxilioVial.lesionados = (auxJson["lesionados"]! as? Int16)!
                                 auxilioVial.longitud = auxJson["longitud"]! as! Double
-                                auxilioVial.muertos = auxJson["muestos"]! as? String
+                                auxilioVial.muertos = (auxJson["muestos"]! as? Int16)!
                                 auxilioVial.observaciones = auxJson["observaciones"]! as? String
                                 auxilioVial.residenteVial = auxJson["residenteVial"]! as? String
                                 auxilioVial.vehiculo = auxJson["vehiculo"]! as? String
@@ -315,10 +317,12 @@ class Sincronizador {
     func descargaTipoEspecifico(_ tipo:Tipo){
         let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_TIPO_ESPECIFICO)"
         let objetoURL  = URL(string:urlTipos)//Se crea la url del servicio
-        //print ("Se descargaran TipoEspecifico")
+        print ("Se descargaran TipoEspecifico")
         //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
         var jsonRequest = [String:Any]()
         jsonRequest["idtipo"] =  tipo.idTipo
+       
+        
         var exito = false;
         do{
             //Se arma el cuerpo de la peticiòn a enviar y la respuesta se asignara a jsonResponse
@@ -332,6 +336,7 @@ class Sincronizador {
             let task = URLSession.shared.dataTask(with: request) { (datos, respuesta, error) in
                 if error != nil {
                     print ("Error en la consulta de los TipoEspecifico \(error!)")
+                    print ("tipo.idTipo" + tipo.idTipo.description)
                     print ("Respuesta: \(respuesta)")
                 }else{
                     do{//se convierte la respuesta del servicio en un json
@@ -402,7 +407,7 @@ class Sincronizador {
                             //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
                             let tipo = Tipo(entity: tipoEntity, insertInto: self.managedObjectContext)
                             tipo.idTipo = tipoJson["idtipo"]! as! NSNumber
-                            tipo.clase = tipoJson["clase"]! as! NSNumber
+                            tipo.clase = tipoJson["clase"]! as! Int16
                             tipo.nombre = tipoJson["nombre"] as! String
                             self.descargaTipoEspecifico(tipo)
                             print ("Tipo: \(tipo.nombre)")
@@ -428,7 +433,7 @@ class Sincronizador {
         
     }
    
-    func descargaClase (_ controlador:UIViewController) ->  Bool{
+    func descargaClase (_ controlador:UIViewController, _ progressView:UIProgressView) ->  Bool{
         var exito = false
         let urlServicioClase = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CLASE)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioClase!){
@@ -445,18 +450,21 @@ class Sincronizador {
                     let claseEntity = NSEntityDescription.entity(forEntityName: "Clase", in: self.managedObjectContext)!
                     for claseJ in clasesJ {
                         let clase = Clase(entity: claseEntity, insertInto: self.managedObjectContext)
-                        clase.idClase = claseJ["idclase"]! as! NSNumber
+                        clase.idClase = claseJ["idclase"]! as! Int16
                         clase.nombre = claseJ["nombre"]! as? String
                         print("Clase: \(clase.nombre)")
                         self.descargaTipos(clase)
                         self.descargaSubTipos(clase)
+                        exito = true;
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
                         print("Clase sincronizados")
                         UserDefaults.standard.set(true, forKey: "Clase")
-                        exito=true
+                        if(exito){
+                            self.inicioVC!.updateProgressView(percent: 0.20)
+                        }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Clase")
                         fatalError("Failure to save context in Clase, with error: \(error)")
@@ -475,7 +483,7 @@ class Sincronizador {
     }
     
     
-    func descargaLado (_ controlador:UIViewController)-> Bool {
+    func descargaLado (_ controlador:UIViewController, _ progressView:UIProgressView)-> Bool {
         var resultado = false
         
         let urlServicioLado = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_LADO)" );
@@ -494,13 +502,16 @@ class Sincronizador {
                         let lado = Lado(entity: ladoEntity, insertInto: self.managedObjectContext)
                         lado.idLado = ladoJ["idlado"]! as! Int16
                         lado.nombre = ladoJ["nombre"]! as! String
+                        resultado = true
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
                         print("Lados sincronizados")
                         UserDefaults.standard.set(true, forKey: "Lado")
-                        resultado = true
+                        if(resultado){
+                            self.inicioVC!.updateProgressView(percent: 0.20)
+                        }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Lado")
                         fatalError("Failure to save context in Lado, with error: \(error)")
@@ -518,7 +529,7 @@ class Sincronizador {
         return resultado
     }
     
-    func descargaCuerpo (_ controlador:UIViewController)-> Bool {
+    func descargaCuerpo (_ controlador:UIViewController, _ progressView:UIProgressView,_ nextButton: UIButton)-> Bool {
         var exito = false
         let urlServicioCuerpo = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CUERPO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioCuerpo!){
@@ -537,14 +548,24 @@ class Sincronizador {
                         let cuerpo = Cuerpo(entity: cuerpoEntity, insertInto: self.managedObjectContext)
                         cuerpo.idCuerpo = cuerpoJ["idcuerpo"]! as! Int16
                         cuerpo.nombre = cuerpoJ["nombre"]! as! String
+                        exito = true
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        print("Cuerpo sincronizados")
-                        UserDefaults.standard.set(exito, forKey: "Cuerpo")
-                        exito=true
+                        print("Termina sincronizacion con cuerpos")
                         
+                        if(exito){
+                            self.inicioVC!.updateProgressView(percent: 0.20)
+                        }
+                        let progress = self.inicioVC?.percentProgressView()
+                        if( progress == 1){
+                            UserDefaults.standard.set(exito, forKey: "Cuerpo")
+                            nextButton.isHidden = false
+                            nextButton.isEnabled = true
+                        }else{
+                            self.inicioVC?.showMessageErrorLoadCatalogos()
+                        }
                     } catch {
                         UserDefaults.standard.set(exito, forKey: "Cuerpo")
                         fatalError("Failure to save context in Cuerpo, with error: \(error)")
@@ -567,7 +588,7 @@ class Sincronizador {
            
     }
     
-    func descargaOrigenVisible (_ controlador:UIViewController) ->Bool{
+    func descargaOrigenVisible (_ controlador:UIViewController, _ progressView:UIProgressView) ->Bool{
         var exito = false;
         let urlServicioOrigenVisib = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ORIENVISIB)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioOrigenVisib!){
@@ -585,13 +606,16 @@ class Sincronizador {
                         origenVisible.idOrienVisib = origen["orienVisib"]! as! Int16
                         origenVisible.nombre = origen["nombre"]! as! String
                         print(origenVisible.nombre)
+                        exito = true
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        exito = true
                         UserDefaults.standard.set(exito, forKey: "OrienVisib")
                         print("OrienVisib sincronizados")
+                        if(exito){
+                            self.inicioVC!.updateProgressView(percent: 0.20)
+                        }
                     } catch {
                         exito = false
                         UserDefaults.standard.set(exito, forKey: "OrienVisib")
@@ -610,17 +634,24 @@ class Sincronizador {
     }
     
     
-    func descargaEntidadesFederativas (_ controlador:UIViewController) -> Bool{
+    func descargaEntidadesFederativas (_ controlador:UIViewController, _ progressView:UIProgressView) -> Bool{
         var resultado = false
         let urlServicioEntidades = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_ENTIDADFEDERATIVA)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioEntidades!){
             (datos, respuesta, error) in
+            
+            let response = respuesta as? HTTPURLResponse
+            print("response.statusCode: " + response!.statusCode.description)
+            
             if error != nil {
                 print ("Error en la consulta de las entidades")
                 let resultadoS = (error?.localizedDescription)!
                 controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
                 
                 resultado = false
+            }else if let response = respuesta as? HTTPURLResponse,
+                response.statusCode == 500{
+                print("No se encuentran los servicios: " )
             }else{
                 do{
                     let entidades = try JSONSerialization.jsonObject(with: datos! , options:
@@ -630,13 +661,17 @@ class Sincronizador {
                         let entidadFederativa = EntidadFederativa(entity: entidadFederativaEntity, insertInto: self.managedObjectContext)
                         entidadFederativa.idEntidadFederativa = entidad["identidad"]! as! NSNumber
                         entidadFederativa.nombre = entidad["nombre"]! as! String
+                        print("EntidadFederativa: " + entidadFederativa.nombre)
+                        resultado = true
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(true, forKey: "EntidadFederativa")
                         print("EntidadFederativa sincronizados")
-                        resultado = true
+                        if(resultado){
+                            self.inicioVC!.updateProgressView(percent: 0.20)
+                        }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "EntidadFederativa")
                         fatalError("Failure to save context in Entidades Federativas, with error: \(error)")
@@ -761,7 +796,7 @@ class Sincronizador {
                             
                             let tramo = Tramo(entity: tramoEntity, insertInto: self.managedObjectContext)
                             tramo.idCarretera = tramoJson["carretera"]! as! NSNumber
-                            tramo.idTramo = tramoJson["idtramo"]! as! NSNumber
+                            tramo.idTramo = tramoJson["idtramo"]! as! Int16
                             tramo.origen = tramoJson["origen"]! as? String
                             tramo.destino = tramoJson["destino"]! as? String
                             

@@ -16,12 +16,13 @@ class Strings {
     let MENSAJE_SIN_CATALOGOS_SIN_INTERNET: String = "Servidores no disponibles para la descarga de los catálogos."
 
     let MENSAJE_NTERNET_NECESARIO: String = "Conectate a internet y vuelve a iniciar la aplicación."
-    let MENSAJE_SINCRONIZAR_CATALOGO: String = "No hay conexión con el servidor, intente más tarde."
+    let MENSAJE_SINCRONIZAR_CATALOGO: String = "No se han podido sincronizar los catálogos, intente más tarde."
     let MENSAJE_REGISTRO_EXITOSO = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
     let MENSAJE_REGISTRO_FALLIDO: String = "Intentelo más tarde"
     
     let MENSAJE_TRAMO: String = "Seleccione el tramo"
     let MENSAJE_DESCRIPCION: String = "Ingrese una descripción"
+    let MENSAJE_IMAGENES: String = "Ingrese alguna imagen"
     let MENSAJE_KM_INICIO: String = "Ingrese un Km. Inicial"
     let MENSAJE_KM_FINAL: String = "Ingrese un Km. Final"
     let MENSAJE_FUENTE_INFO: String = "Ingrese una fuente de información"
@@ -40,8 +41,10 @@ class Strings {
     let TITULO_POR_FAVOR: String = "Por favor"
     let TITULO_ERROR_VALIDACION: String = "Error de validación"
     let MSG_ERROR_REGISTRO: String = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
-    let MENSAJE_SIN_INTERNET: String = "Conectese a internet para poder realizar la operación."
+    let MENSAJE_SIN_INTERNET: String = "Conectese a internet para poder utilizar la aplicación."
     let MSG_EXITO_REGISTRO: String = "Registro exitoso, el administrador validará su información y le enviará un correo electrónico cuando active su cuenta."
+    
+    let MSG_EXITO_ALTA: String = "Se registró exitosamente la incidencia."
     
     let servidor: String = "http://187.188.120.156"
     let puerto: String = ":80"

@@ -8,20 +8,60 @@
 
 import UIKit
 
-class Consulta: UIViewController {
-
+class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     @IBOutlet weak var dateTextFieldInicial: UITextField!
     @IBOutlet weak var dateTextFieldFinal: UITextField!
     @IBOutlet weak var incidentesUISwitch: UISwitch!
     @IBOutlet weak var accidentesUISwitch: UISwitch!
-    
+    @IBOutlet weak var tableView: UITableView!
+    var listaAux:[AnyObject]?
     var formatter:DateFormatter? = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        inicializaDatePickers()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //incidentesUISwitch.setOn(false, animated: true)
+        //accidentesUISwitch.setOn(false, animated: true)
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if listaAux != nil{
+            return (listaAux?.count)!
+        }else{
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = UITableViewCell()
+        let auxvi = listaAux![indexPath.row] as! Auxvial
+        cell.textLabel?.text  = auxvi.descripcion
+        
+        return cell
+    }
+    
     
     @IBAction func Busqueda(_ sender: Any) {
         
         let aux:AuxilioVialDAO = AuxilioVialDAO()
-        let listaAux = aux.getAuxiliovialConsulta(incidentes: incidentesUISwitch.isEnabled, accidentes: accidentesUISwitch.isEnabled, dateTextFieldInicial.text!,dateTextFieldFinal.text!)
-        print ("Auxvial size: \(listaAux?.count)")
+        let fechaInicial = dateTextFieldInicial.text!
+        let fechaFinal = dateTextFieldFinal.text!
+        
+        self.listaAux = aux.getAuxiliovialConsulta(incidentes: accidentesUISwitch.isOn, accidentes: incidentesUISwitch.isOn, fechaInicial.description, fechaFinal.description)
+        
+        for auxVial in listaAux!{
+            print ("Descripcion: " + (auxVial  as! Auxvial).descripcion!)
+            print ((auxVial  as! Auxvial).danioCamino)
+        }
+        tableView.reloadData()
+        print ("Auxvial size: \(String(describing: listaAux?.count))")
     }
     
     @IBAction func descargarServidor(_ sender: Any) {
@@ -32,15 +72,7 @@ class Consulta: UIViewController {
     
     @IBAction func verMapa(_ sender: Any) {
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        inicializaDatePickers()
-        //incidentesUISwitch.setOn(false, animated: true)
-        //accidentesUISwitch.setOn(false, animated: true)
-        
-        // Do any additional setup after loading the view.
-    }
-
+    
     func inicializaDatePickers(){
         formatter = DateFormatter()
         formatter?.dateStyle = DateFormatter.Style.medium

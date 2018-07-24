@@ -88,10 +88,11 @@ class AuxilioVialDAO {
     }
     
     func getAuxiliovialConsulta(incidentes:Bool, accidentes:Bool,_ dateTextFieldInicial:String,_ dateTextFieldFinal:String) ->[AnyObject]?{
+        print ("Incidentes: \(incidentes)")
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
         // Add Predicates
-        let predicate1 = NSPredicate(format: "accidenteIncidente == 1")
-        let predicate2 = NSPredicate(format: "accidenteIncidente == 2")
+        let predicate1 = NSPredicate(format: "idClase == 1")
+        let predicate2 = NSPredicate(format: "idClase == 2")
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
@@ -104,16 +105,16 @@ class AuxilioVialDAO {
         if(accidentes){
             predicates.append(predicate2);
         }
-        if(dateTextFieldInicial.isEmpty){
+        /*if(!dateTextFieldInicial.isEmpty){
             var newDate = dateFormatter.date(from: dateTextFieldInicial)
             let predicate3 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
             predicates.append(predicate3);
         }
-        if(dateTextFieldFinal.isEmpty){
+        if(!dateTextFieldFinal.isEmpty){
             var newDate = dateFormatter.date(from: dateTextFieldFinal)
             let predicate4 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
             predicates.append(predicate4);
-        }
+        }*/
         if(predicates.isEmpty || predicates.count > 0){
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
