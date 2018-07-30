@@ -56,11 +56,11 @@ class SincronizadorVC: UIViewController {
             
         }
         
-        incSincronizadas = auxVialDAO.findIncidentesSincronizados()!;
-        incPorSinc = auxVialDAO.findIncidentesPorSinc()!;
+        incSincronizadas = auxVialDAO.findAuxvial(true,1)!;
+        incPorSinc = auxVialDAO.findAuxvial(false,1)!;
         
-        accSincronizados = auxVialDAO.findAccidentesSincronizados()!;
-        accPorSinc = auxVialDAO.findAccidentesPorSinc()!;
+        accSincronizados = auxVialDAO.findAuxvial(true,2)!;
+        accPorSinc = auxVialDAO.findAuxvial(false,2)!;
         
         totalInc = incSincronizadas + incPorSinc
         totalAc = accSincronizados + accPorSinc

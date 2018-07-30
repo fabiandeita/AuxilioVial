@@ -36,14 +36,10 @@
 		1CE6CBCD2012F5320072EA1B /* Tramo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBCB2012F5320072EA1B /* Tramo+CoreDataProperties.swift */; };
 		1CE6CBDE2012F7840072EA1B /* Lado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD02012F7840072EA1B /* Lado.swift */; };
 		1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */; };
-		1CE6CBE02012F7840072EA1B /* Clase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD22012F7840072EA1B /* Clase.swift */; };
-		1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */; };
 		1CE6CBE22012F7840072EA1B /* TipoEsp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD42012F7840072EA1B /* TipoEsp.swift */; };
 		1CE6CBE32012F7840072EA1B /* TipoEsp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */; };
 		1CE6CBE42012F7840072EA1B /* Cuerpo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD62012F7840072EA1B /* Cuerpo.swift */; };
 		1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */; };
-		1CE6CBE62012F7840072EA1B /* Tipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD82012F7840072EA1B /* Tipo.swift */; };
-		1CE6CBE72012F7840072EA1B /* Tipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */; };
 		1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDA2012F7840072EA1B /* SubTipo.swift */; };
 		1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */; };
 		1F853525209FA2BA002307C6 /* Auxvial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F853521209FA2BA002307C6 /* Auxvial.swift */; };
@@ -54,6 +50,11 @@
 		1FC3555F2098EEB5002BE8CE /* Navegacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3555E2098EEB5002BE8CE /* Navegacion.swift */; };
 		1FC3556320994A35002BE8CE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3556220994A35002BE8CE /* CollectionViewCell.swift */; };
 		1FC3556720994E58002BE8CE /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC3556620994E58002BE8CE /* CollectionViewCells.swift */; };
+		1FCB10D42107E8CF00780367 /* Tipo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D22107E8CF00780367 /* Tipo+CoreDataClass.swift */; };
+		1FCB10D52107E8CF00780367 /* Tipo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D32107E8CF00780367 /* Tipo+CoreDataProperties.swift */; };
+		1FCB10D82107E99800780367 /* Clase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D62107E99800780367 /* Clase.swift */; };
+		1FCB10D92107E99800780367 /* Clase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D72107E99800780367 /* Clase+CoreDataProperties.swift */; };
+		1FCB10DB210CFFE000780367 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10DA210CFFE000780367 /* MapVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,14 +90,10 @@
 		1CE6CBCB2012F5320072EA1B /* Tramo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tramo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CE6CBD02012F7840072EA1B /* Lado.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lado.swift; sourceTree = "<group>"; };
 		1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lado+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1CE6CBD22012F7840072EA1B /* Clase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clase.swift; sourceTree = "<group>"; };
-		1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Clase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CE6CBD42012F7840072EA1B /* TipoEsp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipoEsp.swift; sourceTree = "<group>"; };
 		1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TipoEsp+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CE6CBD62012F7840072EA1B /* Cuerpo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cuerpo.swift; sourceTree = "<group>"; };
 		1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cuerpo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1CE6CBD82012F7840072EA1B /* Tipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tipo.swift; sourceTree = "<group>"; };
-		1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CE6CBDA2012F7840072EA1B /* SubTipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTipo.swift; sourceTree = "<group>"; };
 		1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubTipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F853521209FA2BA002307C6 /* Auxvial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auxvial.swift; sourceTree = "<group>"; };
@@ -107,6 +104,11 @@
 		1FC3555E2098EEB5002BE8CE /* Navegacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navegacion.swift; sourceTree = "<group>"; };
 		1FC3556220994A35002BE8CE /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionViewCell.swift; path = DataController/CollectionViewCell.swift; sourceTree = "<group>"; };
 		1FC3556620994E58002BE8CE /* CollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
+		1FCB10D22107E8CF00780367 /* Tipo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tipo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FCB10D32107E8CF00780367 /* Tipo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tipo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCB10D62107E99800780367 /* Clase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clase.swift; sourceTree = "<group>"; };
+		1FCB10D72107E99800780367 /* Clase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Clase+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1FCB10DA210CFFE000780367 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,22 +125,22 @@
 		1C616255200B1CB60087A859 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FCB10D62107E99800780367 /* Clase.swift */,
+				1FCB10D72107E99800780367 /* Clase+CoreDataProperties.swift */,
+				1FCB10D22107E8CF00780367 /* Tipo+CoreDataClass.swift */,
+				1FCB10D32107E8CF00780367 /* Tipo+CoreDataProperties.swift */,
 				1F853521209FA2BA002307C6 /* Auxvial.swift */,
 				1F853522209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift */,
 				1F853523209FA2BA002307C6 /* Image.swift */,
 				1F853524209FA2BA002307C6 /* Image+CoreDataProperties.swift */,
 				1CE6CBD42012F7840072EA1B /* TipoEsp.swift */,
 				1CE6CBD52012F7840072EA1B /* TipoEsp+CoreDataProperties.swift */,
-				1CE6CBD82012F7840072EA1B /* Tipo.swift */,
-				1CE6CBD92012F7840072EA1B /* Tipo+CoreDataProperties.swift */,
 				1CE6CBDA2012F7840072EA1B /* SubTipo.swift */,
 				1C20D15B203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift */,
 				1C20D15C203017BD00D0AB8D /* OrienVisib+CoreDataProperties.swift */,
 				1CE6CBDB2012F7840072EA1B /* SubTipo+CoreDataProperties.swift */,
 				1CE6CBD62012F7840072EA1B /* Cuerpo.swift */,
 				1CE6CBD72012F7840072EA1B /* Cuerpo+CoreDataProperties.swift */,
-				1CE6CBD22012F7840072EA1B /* Clase.swift */,
-				1CE6CBD32012F7840072EA1B /* Clase+CoreDataProperties.swift */,
 				1CE6CBD02012F7840072EA1B /* Lado.swift */,
 				1CE6CBD12012F7840072EA1B /* Lado+CoreDataProperties.swift */,
 				1CE6CBCA2012F5320072EA1B /* Tramo.swift */,
@@ -220,6 +222,7 @@
 				1C1D8C7E2043C67D002A0CE1 /* ImageViewController.swift */,
 				1CA8A1CC2060555F00711EEA /* Consulta.swift */,
 				1FC3555C20979B22002BE8CE /* InicioVC.swift */,
+				1FCB10DA210CFFE000780367 /* MapVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -310,9 +313,11 @@
 			files = (
 				1CE6CBE42012F7840072EA1B /* Cuerpo.swift in Sources */,
 				1CDC33F5203D3D3600DA0E67 /* Localizacion.swift in Sources */,
-				1CE6CBE72012F7840072EA1B /* Tipo+CoreDataProperties.swift in Sources */,
 				1CE6CBC3201013220072EA1B /* Alert.swift in Sources */,
 				1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */,
+				1FCB10D92107E99800780367 /* Clase+CoreDataProperties.swift in Sources */,
+				1FCB10DB210CFFE000780367 /* MapVC.swift in Sources */,
+				1FCB10D52107E8CF00780367 /* Tipo+CoreDataProperties.swift in Sources */,
 				1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */,
 				1CE6CBE82012F7840072EA1B /* SubTipo.swift in Sources */,
 				1FC3555D20979B22002BE8CE /* InicioVC.swift in Sources */,
@@ -330,8 +335,8 @@
 				1C8202682002EFB700A96668 /* TableroControlVC.swift in Sources */,
 				1C1D8C7F2043C67D002A0CE1 /* ImageViewController.swift in Sources */,
 				1F853525209FA2BA002307C6 /* Auxvial.swift in Sources */,
+				1FCB10D42107E8CF00780367 /* Tipo+CoreDataClass.swift in Sources */,
 				1FC3556720994E58002BE8CE /* CollectionViewCells.swift in Sources */,
-				1CE6CBE02012F7840072EA1B /* Clase.swift in Sources */,
 				1C61625B200B1EE20087A859 /* Strings.swift in Sources */,
 				1CE6CBE92012F7840072EA1B /* SubTipo+CoreDataProperties.swift in Sources */,
 				1C50A7CD2026284F00123E5A /* AltaVC.swift in Sources */,
@@ -339,13 +344,12 @@
 				1C166AE4200C4A1A000AD883 /* AuxilioVial.xcdatamodeld in Sources */,
 				1CE6CB9D200F10980072EA1B /* EntidadFederativa+CoreDataProperties.swift in Sources */,
 				1C20D15D203017BD00D0AB8D /* OrienVisib+CoreDataClass.swift in Sources */,
-				1CE6CBE62012F7840072EA1B /* Tipo.swift in Sources */,
 				1F853526209FA2BA002307C6 /* Auxvial+CoreDataProperties.swift in Sources */,
 				1C8202551FF04BCF00A96668 /* AppDelegate.swift in Sources */,
 				1C616258200B1D960087A859 /* Sincronizador.swift in Sources */,
+				1FCB10D82107E99800780367 /* Clase.swift in Sources */,
 				1F853528209FA2BA002307C6 /* Image+CoreDataProperties.swift in Sources */,
 				1CE6CB9C200F10980072EA1B /* EntidadFederativa.swift in Sources */,
-				1CE6CBE12012F7840072EA1B /* Clase+CoreDataProperties.swift in Sources */,
 				1CA8A1CD2060555F00711EEA /* Consulta.swift in Sources */,
 				1C1D8C812047A8E0002A0CE1 /* Conexion.swift in Sources */,
 				1CE6CBC6201070330072EA1B /* Carretera.swift in Sources */,

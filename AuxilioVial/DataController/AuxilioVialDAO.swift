@@ -34,28 +34,61 @@ class AuxilioVialDAO {
     }
     
     func findIncidentesPorSinc() -> Int16?{
-        let query = "select a.* from AUXVIAL as a  INNER JOIN Tipo_Esp AS TE ON A.icveTipoEsp = TE.icve " +
-        " INNER JOIN Tipo AS T ON TE.icvetipo = T.icve " +
-        " where a.syncser <> 1 AND T.icveclase = 1 ";
         
-        let countExpressionDesc = NSExpressionDescription()
-        countExpressionDesc.name = "countAnimals"
-        countExpressionDesc.expression = NSExpression(forFunction: "count:", arguments: [NSExpression(forKeyPath: "syncSer")])
-        countExpressionDesc.expressionResultType = NSAttributeType.integer32AttributeType
         
-        let request = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        let keypathExp = NSExpression(forKeyPath: "syncSer") // can be any column
+        let expression = NSExpression(forFunction: "count:", arguments: [keypathExp])
         
-        request.propertiesToFetch = [ "syncSer", countExpressionDesc]
-        request.propertiesToGroupBy = ["syncSer", "syncSer"]
-        request.resultType = NSFetchRequestResultType.dictionaryResultType
-        request.predicate = NSPredicate(format: "accidenteIncidente == %@", 0)
+        let countDesc = NSExpressionDescription()
+        countDesc.expression = expression
+        countDesc.name = "count"
+        countDesc.expressionResultType = .integer64AttributeType
         
-        let results = try! managedObjectContext.execute(request)
-        //print( "Resultado: \(results)" )
-        if let results = results as? [NSDictionary] {
-            print( "Resultado: \(results)" )
+        let request = NSFetchRequest<NSDictionary>(entityName:"Auxvial")
+        request.returnsObjectsAsFaults = false
+        request.propertiesToGroupBy = ["syncSer"]
+        request.propertiesToFetch = ["syncSer", countDesc]
+        request.predicate = NSPredicate(format: "idClase == 1 and syncSer == false")
+        request.resultType = .dictionaryResultType
+        
+        let results = try! managedObjectContext.fetch(request)
+        print( "Resultado: \(results.description)" )
+        for data in results as! [NSManagedObject] {
+            print(data.value(forKey: "username") as! String)
         }
-         
+        
+        return 0;
+    }
+    
+    func findAuxvial(_ sincServ:Bool, _ clase:Int16 ) -> Int16?{
+        
+        
+        let keypathExp = NSExpression(forKeyPath: "syncSer") // can be any column
+        let expression = NSExpression(forFunction: "count:", arguments: [keypathExp])
+        
+        let countDesc = NSExpressionDescription()
+        countDesc.expression = expression
+        countDesc.name = "count"
+        countDesc.expressionResultType = .integer64AttributeType
+        
+        let request = NSFetchRequest<NSDictionary>(entityName:"Auxvial")
+        request.returnsObjectsAsFaults = false
+        request.propertiesToGroupBy = ["syncSer"]
+        request.propertiesToFetch = ["syncSer", countDesc]
+        request.predicate = NSPredicate(format: "idClase == \(clase) and syncSer == \(sincServ)")
+        request.resultType = .dictionaryResultType
+        
+        let results = try! managedObjectContext.fetch(request)
+        print( "Resultado: \(results.description)" )
+        if(results.count > 0){
+            let r = results[0]
+            if(results.count > 0){
+                print( "Resultado: \( r.value(forKey: "count"))" )
+                return r.value(forKey: "count") as! Int16
+            }
+        }
+        
+        
         return 0;
     }
     
@@ -88,39 +121,51 @@ class AuxilioVialDAO {
     }
     
     func getAuxiliovialConsulta(incidentes:Bool, accidentes:Bool,_ dateTextFieldInicial:String,_ dateTextFieldFinal:String) ->[AnyObject]?{
-        print ("Incidentes: \(incidentes)")
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
         // Add Predicates
-        let predicate1 = NSPredicate(format: "idClase == 1")
-        let predicate2 = NSPredicate(format: "idClase == 2")
+        var predicate1 : NSPredicate
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         
         
         var predicates = [NSPredicate]()
-        if(incidentes){
+        if(incidentes && accidentes){
+            predicate1 = NSPredicate(format: "idClase == 1 or idClase == 2")
+            predicates.append(predicate1);
+        }else if(!incidentes && !accidentes){
+            predicate1 = NSPredicate(format: "idClase != 1 and idClase != 2")
+            predicates.append(predicate1);
+        }else if(accidentes){
+            predicate1 = NSPredicate(format: "idClase == 2")
+            predicates.append(predicate1);
+        }else if(incidentes){
+            predicate1 = NSPredicate(format: "idClase == 1")
             predicates.append(predicate1);
         }
-        if(accidentes){
-            predicates.append(predicate2);
-        }
-        /*if(!dateTextFieldInicial.isEmpty){
+        if(!dateTextFieldInicial.isEmpty){
             var newDate = dateFormatter.date(from: dateTextFieldInicial)
-            let predicate3 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
+            let predicate3 = NSPredicate(format: "fechacreacion >= %@", newDate! as NSDate)
             predicates.append(predicate3);
         }
         if(!dateTextFieldFinal.isEmpty){
             var newDate = dateFormatter.date(from: dateTextFieldFinal)
-            let predicate4 = NSPredicate(format: "fechacreacion >= %@", newDate! as CVarArg)
+            let predicate4 = NSPredicate(format: "fechacreacion <= %@", newDate! as NSDate)
             predicates.append(predicate4);
-        }*/
+        }
         if(predicates.isEmpty || predicates.count > 0){
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
+    
+    func findAllAuxiliovial() ->[AnyObject]?{ 
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    } 
     
     func getAuxvialByIdAuxvial (_ idAuxvial:Int16) ->[AnyObject]?{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")

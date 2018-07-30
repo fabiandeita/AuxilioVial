@@ -82,6 +82,7 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     
     
     func poblarAuxilio(){
+        auxilio?.fechacreacion = NSDate()
         auxilio?.idClase = (clase?.idClase)!
         auxilio?.idCuerpo = (cuerpo?.idCuerpo)!
         auxilio?.idTipoEsp = (tipoEsp?.idtipoEsp)!
@@ -103,6 +104,12 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         auxilio?.danioCamino = (danioCaminoTF.text)!
         auxilio?.tiempoRespuesta = (respuestaTF.text)!
         auxilio?.observaciones = (actuacionesTF.text)!
+        
+        auxilio?.altitud = Double((altitudTF.text)!)!
+        auxilio?.latitud = Double((latitudTF.text)!)!
+        auxilio?.longitud = Double((longitudTF.text)!)!
+        
+        
     }
     
     @IBAction func regresar(_ sender: Any) {

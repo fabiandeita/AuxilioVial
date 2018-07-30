@@ -2,7 +2,7 @@
 //  Tipo+CoreDataProperties.swift
 //  AuxilioVial
 //
-//  Created by Iris Viridiana on 19/01/18.
+//  Created by Fabian on 24/07/18.
 //  Copyright © 2018 Iris Viridiana. All rights reserved.
 //
 //
@@ -13,8 +13,12 @@ import CoreData
 
 extension Tipo {
 
-    @NSManaged var idTipo: NSNumber
-    @NSManaged var nombre: String?
-    @NSManaged var clase: Int16
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Tipo> {
+        return NSFetchRequest<Tipo>(entityName: "Tipo")
+    }
+
+    @NSManaged public var clase: Int16
+    @NSManaged public var idTipo: Int16
+    @NSManaged public var nombre: String?
 
 }

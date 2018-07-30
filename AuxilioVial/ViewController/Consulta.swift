@@ -38,12 +38,22 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return 0
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print()
+        let aux = listaAux![indexPath[1]] as! Auxvial
+        print(aux.latitud)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell()
         let auxvi = listaAux![indexPath.row] as! Auxvial
         cell.textLabel?.text  = auxvi.descripcion
-        
+        if(auxvi.idClase == 1){
+            cell.imageView!.image = UIImage(named: "incidente")
+        }else{
+            cell.imageView!.image = UIImage(named: "accidente")
+        }
+        cell
         return cell
     }
     
@@ -54,14 +64,22 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let fechaInicial = dateTextFieldInicial.text!
         let fechaFinal = dateTextFieldFinal.text!
         
-        self.listaAux = aux.getAuxiliovialConsulta(incidentes: accidentesUISwitch.isOn, accidentes: incidentesUISwitch.isOn, fechaInicial.description, fechaFinal.description)
+        self.listaAux = aux.getAuxiliovialConsulta(incidentes: incidentesUISwitch.isOn, accidentes: accidentesUISwitch.isOn, fechaInicial.description, fechaFinal.description)
         
-        for auxVial in listaAux!{
+        /*for auxVial in listaAux!{
             print ("Descripcion: " + (auxVial  as! Auxvial).descripcion!)
             print ((auxVial  as! Auxvial).danioCamino)
+            print ("fechacreacion: \((auxVial  as! Auxvial).fechacreacion)")
+            print ("Clase: \((auxVial  as! Auxvial).idClase)")
+        }*/
+        if((self.listaAux?.count)! > 0){
+            tableView.isHidden = false
+            tableView.reloadData()
+        }else{
+            tableView.isHidden = true
         }
-        tableView.reloadData()
-        print ("Auxvial size: \(String(describing: listaAux?.count))")
+        
+        //print ("Auxvial size: \(String(describing: listaAux?.count))")
     }
     
     @IBAction func descargarServidor(_ sender: Any) {
@@ -75,6 +93,7 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func inicializaDatePickers(){
         formatter = DateFormatter()
+        formatter?.locale = NSLocale(localeIdentifier: "es_MX") as Locale?
         formatter?.dateStyle = DateFormatter.Style.medium
         formatter?.timeStyle = DateFormatter.Style.none
         

@@ -2,7 +2,7 @@
 //  Clase+CoreDataProperties.swift
 //  AuxilioVial
 //
-//  Created by Iris Viridiana on 19/01/18.
+//  Created by Fabian on 24/07/18.
 //  Copyright © 2018 Iris Viridiana. All rights reserved.
 //
 //
@@ -13,7 +13,11 @@ import CoreData
 
 extension Clase {
 
-    @NSManaged var idClase: Int16
-    @NSManaged var nombre: String?
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Clase> {
+        return NSFetchRequest<Clase>(entityName: "Clase")
+    }
+
+    @NSManaged public var idClase: Int16
+    @NSManaged public var nombre: String?
 
 }

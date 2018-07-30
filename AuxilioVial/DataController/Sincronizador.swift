@@ -406,7 +406,7 @@ class Sincronizador {
                         for tipoJson in tiposJson {
                             //Se genera un aentidad de Core Data - Carretera.swift y se rellena con la info del json
                             let tipo = Tipo(entity: tipoEntity, insertInto: self.managedObjectContext)
-                            tipo.idTipo = tipoJson["idtipo"]! as! NSNumber
+                            tipo.idTipo = tipoJson["idtipo"]! as! Int16
                             tipo.clase = tipoJson["clase"]! as! Int16
                             tipo.nombre = tipoJson["nombre"] as! String
                             self.descargaTipoEspecifico(tipo)
@@ -875,7 +875,8 @@ class Sincronizador {
     func getTiposByClase (_ clase:Clase) ->[AnyObject]?{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tipo")
         //userFetch.fetchLimit = 1//clase deberia llamarse idClase
-        fetchRequest.predicate = NSPredicate(format: "clase == %@", clase.idClase)
+        print(clase.idClase)
+        fetchRequest.predicate = NSPredicate(format: "clase == \(clase.idClase)" )
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
@@ -883,7 +884,7 @@ class Sincronizador {
     func getTipoEspByTipo(tipo:Tipo) ->[AnyObject]{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"TipoEsp")
         //userFetch.fetchLimit = 1//clase deberia llamarse idClase
-        fetchRequest.predicate = NSPredicate(format: "tipo == %@", tipo.idTipo)
+        fetchRequest.predicate = NSPredicate(format: "tipo == \(tipo.idTipo)" )
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
@@ -891,7 +892,7 @@ class Sincronizador {
     func getSubTipoByClase(clase:Clase) ->[AnyObject]{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"SubTipo")
         //userFetch.fetchLimit = 1//clase deberia llamarse idClase
-        fetchRequest.predicate = NSPredicate(format: "clase == %@", clase.idClase)
+        fetchRequest.predicate = NSPredicate(format: "clase == \(clase.idClase)")
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
