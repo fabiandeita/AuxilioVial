@@ -16,28 +16,36 @@ class InicioVC: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var texto1Label: UILabel!
     @IBOutlet weak var text2Label: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sincronizador.inicioVC = self
+        nextButton.isEnabled = false
+        progressView.progress = 0
+        indicator.startAnimating()
+        if(!sincronizador.isCatalogosDescargados()){
+            if Conexion.isConnectedToNetwork(){
+                sincronizador.descargaEntidadesFederativas(self, progressView)
+                /*sincronizador.descargaOrigenVisible(self, progressView)
+                sincronizador.descargaLado(self, progressView)
+                sincronizador.descargaClase(self, progressView)
+                sincronizador.descargaCuerpo(self, progressView)*/
+            }
+            
+        }
+ 
+    }
     
     @IBAction func continueToLogin(_ sender: Any) {
         if(sincronizador.isCatalogosDescargados()){
             self.performSegue(withIdentifier: "loginScreenSegue", sender: "")
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        sincronizador.inicioVC = self
-        nextButton.isEnabled = false
-        progressView.progress = 0
-        if(!sincronizador.isCatalogosDescargados()){
-            if Conexion.isConnectedToNetwork(){
-                sincronizador.descargaEntidadesFederativas(self, progressView)
-                sincronizador.descargaOrigenVisible(self, progressView)
-                sincronizador.descargaLado(self, progressView)
-                sincronizador.descargaClase(self, progressView)
-                sincronizador.descargaCuerpo(self, progressView, nextButton)
-            }
-            
-        }
- 
+    
+    public func stopAnimateIndicator(){
+        indicator.stopAnimating()
+        indicator.isHidden = true
     }
     
     func updateProgressView(percent: Float){

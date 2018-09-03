@@ -205,8 +205,12 @@ class Sincronizador {
                         //Se le dice a CoreData que se almacenaran Auxvial
                         let auxiliovialEntity = NSEntityDescription.entity(forEntityName: "Auxvial", in: self.managedObjectContext)!
                         for auxJson in auxvialesJson {
-                            let aux = self.auxvialDAO.getAuxvialByIdAuxvial(auxJson["idauxvial"]! as! Int16)
-                            if aux?.count == 0{
+                            let aux = self.auxvialDAO.getAuxvialByIdAuxvial(auxJson["idauxvial"]! as! Int16) as! [Auxvial]
+                            print(aux.count)
+                            print(aux[0].fechacreacion)
+                            print(aux[0].descripcion)
+                            print(aux[0].danioCamino)
+                            if aux != nil && aux.count == 0{
                                 //Se genera un Auxvial de Core Data - Auxvial.swift y se rellena con la info del json
                                 let auxilioVial = Auxvial(entity: auxiliovialEntity, insertInto: self.managedObjectContext)
                                 auxilioVial.altitud = auxJson["altitud"]! as! Double
@@ -217,6 +221,7 @@ class Sincronizador {
                                 auxilioVial.fechacreacion = auxJson["fechacreacion"]! as? NSDate
                                 auxilioVial.fuenteInf = auxJson["fuenteInf"]! as? String
                                 auxilioVial.idCuerpo = auxJson["idCuerpo"]! as! Int16
+                                auxilioVial.idClase = auxJson["idClase"]! as! Int16
                                 auxilioVial.idLado = auxJson["idLado"]! as! Int16
                                 auxilioVial.idOrienVisible = auxJson["idOrienVisible"]! as! Int16
                                 auxilioVial.idSubtipo = auxJson["idSubtipo"]! as! Int16
@@ -231,19 +236,23 @@ class Sincronizador {
                                 auxilioVial.muertos = (auxJson["muestos"]! as? Int16)!
                                 auxilioVial.observaciones = auxJson["observaciones"]! as? String
                                 auxilioVial.residenteVial = auxJson["residenteVial"]! as? String
+                                auxilioVial.tiempoRespuesta = auxJson["tiempoRespuesta"]! as? String
                                 auxilioVial.vehiculo = auxJson["vehiculo"]! as? String
                                 auxilioVial.vehiculosInvolucrados = auxJson["vehiculosInvolucrados"]! as? String
+                                //Sincronizado
+                                
+                                // Save the entity
+                                do {
+                                    try self.managedObjectContext.save()
+                                    UserDefaults.standard.set(true, forKey: "Auxvial")
+                                } catch {
+                                    UserDefaults.standard.set(false, forKey: "Auxvial")
+                                    fatalError("Failure to save context in Auxvial, with error: \(error)")
+                                }
                             }
                             //print ("Auxvial: \(auxJson)")
                         }
-                        // Save
-                        do {
-                            try self.managedObjectContext.save()
-                            UserDefaults.standard.set(true, forKey: "Auxvial")
-                        } catch {
-                            UserDefaults.standard.set(false, forKey: "Auxvial")
-                            fatalError("Failure to save context in Auxvial, with error: \(error)")
-                        }
+                        
                     }catch {
                         print("El Procesamiento del JSON tuvo un error \(error)")
                         //mandar popup de que hubo error, :No se econtro el servidor, problema de conexino, etc
@@ -464,6 +473,7 @@ class Sincronizador {
                         UserDefaults.standard.set(true, forKey: "Clase")
                         if(exito){
                             self.inicioVC!.updateProgressView(percent: 0.20)
+                            self.descargaCuerpo(controlador, progressView)
                         }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Clase")
@@ -511,6 +521,7 @@ class Sincronizador {
                         UserDefaults.standard.set(true, forKey: "Lado")
                         if(resultado){
                             self.inicioVC!.updateProgressView(percent: 0.20)
+                            self.descargaClase(controlador, progressView)
                         }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "Lado")
@@ -529,7 +540,7 @@ class Sincronizador {
         return resultado
     }
     
-    func descargaCuerpo (_ controlador:UIViewController, _ progressView:UIProgressView,_ nextButton: UIButton)-> Bool {
+    func descargaCuerpo (_ controlador:UIViewController, _ progressView:UIProgressView)-> Bool {
         var exito = false
         let urlServicioCuerpo = URL(string: "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_GET_CUERPO)" );
         let tarea = URLSession.shared.dataTask(with: urlServicioCuerpo!){
@@ -537,7 +548,6 @@ class Sincronizador {
             if error != nil {
                 print ("Error en la consulta de Cuerpo")
                 controlador.present(self.alert.mostrarAlertaSencilla(titulo : self.strings.TITULO_ERROR_VALIDACION, mensaje : self.strings.MENSAJE_SIN_CATALOGOS_SIN_INTERNET), animated: true, completion: nil)
-                
             }else{
                 do{
                     //Casteamos el resultado a un diccionario, para despues recorrerlo
@@ -560,9 +570,14 @@ class Sincronizador {
                         }
                         let progress = self.inicioVC?.percentProgressView()
                         if( progress == 1){
-                            UserDefaults.standard.set(exito, forKey: "Cuerpo")
-                            nextButton.isHidden = false
-                            nextButton.isEnabled = true
+                            DispatchQueue.main.async {
+                                UserDefaults.standard.set(exito, forKey: "Cuerpo")
+                                self.inicioVC?.nextButton.isHidden = false
+                                self.inicioVC?.nextButton.isEnabled = true
+                                self.inicioVC?.stopAnimateIndicator()
+                                self.inicioVC?.indicator.isHidden = true;
+                            }
+                            
                         }else{
                             self.inicioVC?.showMessageErrorLoadCatalogos()
                         }
@@ -615,6 +630,7 @@ class Sincronizador {
                         print("OrienVisib sincronizados")
                         if(exito){
                             self.inicioVC!.updateProgressView(percent: 0.20)
+                            self.descargaLado(controlador, progressView)
                         }
                     } catch {
                         exito = false
@@ -667,10 +683,12 @@ class Sincronizador {
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        UserDefaults.standard.set(true, forKey: "EntidadFederativa")
-                        print("EntidadFederativa sincronizados")
+                        
                         if(resultado){
+                            UserDefaults.standard.set(true, forKey: "EntidadFederativa")
+                            print("EntidadFederativa sincronizados")
                             self.inicioVC!.updateProgressView(percent: 0.20)
+                            self.descargaOrigenVisible(controlador, progressView)
                         }
                     } catch {
                         UserDefaults.standard.set(false, forKey: "EntidadFederativa")
@@ -871,6 +889,14 @@ class Sincronizador {
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
+    
+    func getTramoById (_ idTramo:Int16) ->Tramo?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tramo")
+        //userFetch.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "idTramo == \(idTramo)")
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys[0] as? Tramo
+    }
   
     func getTiposByClase (_ clase:Clase) ->[AnyObject]?{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tipo")
@@ -885,6 +911,23 @@ class Sincronizador {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"TipoEsp")
         //userFetch.fetchLimit = 1//clase deberia llamarse idClase
         fetchRequest.predicate = NSPredicate(format: "tipo == \(tipo.idTipo)" )
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getTipoById(id:Int16) ->[AnyObject]{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Tipo")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "idTipo == \(id)" )
+        print("getTipoById: idTipo == \(id)" )
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getTipoEspById(id:Int16) ->[AnyObject]{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"TipoEsp")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "idtipoEsp == \(id)" )
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }

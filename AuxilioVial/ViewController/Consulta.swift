@@ -84,7 +84,7 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func descargarServidor(_ sender: Any) {
         let  sincronizador:Sincronizador = Sincronizador()
-        sincronizador.descargaAuxvialByEntidad(18)
+        sincronizador.descargaAuxvialByEntidad(UserDefaults.standard.integer(forKey: "idEntidad"))
         
     }
     

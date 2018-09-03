@@ -27,9 +27,11 @@ import MobileCoreServices
         deleteImageBtn.isHidden = true
         collectionView.dataSource = self
         collectionView.delegate = self
+        
     }
     
     @IBAction func regresarUIButton(_ sender: Any) {
+        
         self.performSegue(withIdentifier: "ImagenesToCaptacionSegue", sender: listaImage)
         //prepare(for:   "ImagenesToCaptacionSegue", sender: listaImage)
     }
@@ -37,6 +39,7 @@ import MobileCoreServices
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let AltaVC = segue.destination as? AltaVC {
             AltaVC.listaImage = listaImage
+            AltaVC.auxilio = auxilio
         }
     }
     

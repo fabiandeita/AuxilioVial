@@ -80,23 +80,126 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     let locationMannager = CLLocationManager()
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        idEntidadFederativaUsuario = sincronizador.getIdEntidadFederativa() as NSNumber
+        // Do any additional setup after loading the view.
+        
+        
+        locationMannager.delegate = self
+        locationMannager.desiredAccuracy = kCLLocationAccuracyBest
+        locationMannager.requestWhenInUseAuthorization()
+        let authorizationStatus = CLLocationManager.authorizationStatus()
+        
+        locationMannager.startUpdatingLocation()
+        
+        //Initialize the variables for a quickly capture
+        if(auxilio == nil){
+            loadEntidades()
+            loadClase()
+            loadLado()
+            loadOrienVisib()
+            loadCuerpo()
+            testFaster()
+        }else{
+            loadEntidades()
+            loadClase()
+            loadLado()
+            loadOrienVisib()
+            loadCuerpo()
+            populateFromEntity()
+        }
+        
+    }
+    
+    func populateFromEntity(){
+        descripcionTF.text = auxilio?.descripcion
+        kmInicialTF.text = auxilio?.kmInicio
+        kmFinalTF.text = auxilio?.kmFinal
+        
+        informacionTF.text = auxilio?.fuenteInf
+        vehiculoTF.text = auxilio?.vehiculo
+        vehiculosInvolucradosTF.text = auxilio?.vehiculosInvolucrados
+        danioCaminoTF.text = auxilio?.danioCamino
+        vialidadTF.text = auxilio?.residenteVial
+        respuestaTF.text = auxilio?.tiempoRespuesta
+        actuacionesTF.text = auxilio?.observaciones
+        
+        
+        clase?.idClase = (auxilio?.idClase)!
+        cuerpo?.idCuerpo = (auxilio?.idCuerpo)!
+        tipoEsp?.idtipoEsp = (auxilio?.idTipoEsp)!
+        auxilio?.idSubtipo = (subTipo?.idSubtipo)!
+        lado?.idLado = (auxilio?.idLado)!
+        tramo?.idTramo = (auxilio?.idTramo)!
+        orienVisib?.idOrienVisib = (auxilio!.idOrienVisible)
+        lesionadosTF.text = String(describing: auxilio!.lesionados)
+        muertosTF.text = String(describing: auxilio?.muertos)
+        if let value = auxilio?.lesionados{
+            lesionadosTF.text = String(describing: value)
+        }
+        if let value = auxilio?.muertos{
+            muertosTF.text = String(describing: value)
+        }
+        
+        
+
+    }
+    func testFaster(){
+        descripcionTF.text = "Poblado inicial"
+        kmInicialTF.text = "0.0"
+        kmFinalTF.text = "0.0"
+        informacionTF.text = "información"
+        lesionadosTF.text = "0"
+        muertosTF.text = "0"
+        vehiculoTF.text = "Camioneta Ford"
+        vehiculosInvolucradosTF.text = "0"
+        danioCaminoTF.text = "Asfalto"
+        vialidadTF.text = "Fabian De Ita"
+        respuestaTF.text = "11:22 horas"
+        actuacionesTF.text = "Gruas y señalamiento"
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //print("lat: ", locations[0].coordinate.latitude, " long: ", locations[0].coordinate.longitude, " Alt: ", locations[0].altitude)
+        latitudTF.text = locations[0].coordinate.latitude.description
+        longitudTF.text = locations[0].coordinate.longitude.description
+        altitudTF.text = locations[0].altitude.description
+    }
+
     
     func poblarAuxilio(){
+        if(auxilio == nil){
+            print("auxilio is nil")
+            
+            var managedObjectContext: NSManagedObjectContext!
+            var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            managedObjectContext = appDelegate.persistentContainer.viewContext
+            
+            let entityAuxvial = NSEntityDescription.entity(forEntityName: "Auxvial", in: managedObjectContext)!
+            auxilio = Auxvial(entity: entityAuxvial, insertInto: managedObjectContext)
+        }
         auxilio?.fechacreacion = NSDate()
         auxilio?.idClase = (clase?.idClase)!
         auxilio?.idCuerpo = (cuerpo?.idCuerpo)!
         auxilio?.idTipoEsp = (tipoEsp?.idtipoEsp)!
+        print("tipoEsp?.idtipoEsp almacenado: \(tipoEsp?.idtipoEsp)")
+        print("tipoEsp?.nombre almacenado: \(tipoEsp?.nombre)")
+        print("tipoEsp?.tipo almacenado: \(tipoEsp?.tipo)")
         auxilio?.idSubtipo = (subTipo?.idSubtipo)!
         auxilio?.idLado = (lado?.idLado)!
         auxilio?.idTramo = (tramo?.idTramo)!
         auxilio?.idOrienVisible = (orienVisib?.idOrienVisib)!
         auxilio?.descripcion = (descripcionTF.text)!
-        print("descripcion 1: \(auxilio?.descripcion ?? "")")
-        print("descripcion 2: \((descripcionTF.text)!)")
+        //print("descripcion 1: \(auxilio?.descripcion ?? "")")
+        //print("descripcion 2: \((descripcionTF.text)!)")
         auxilio?.kmInicio = (kmInicialTF.text)!
         auxilio?.kmFinal = (kmFinalTF.text)!
         auxilio?.fuenteInf = (informacionTF.text)!
         auxilio?.residenteVial = (vialidadTF.text)!
+        print("lesionadosTF 1: \(String(describing: (lesionadosTF.text)))")
+        print("lesionadosTF 2: \(String(describing: lesionadosTF.text))")
         auxilio?.lesionados = Int16(lesionadosTF.text!)!
         auxilio?.muertos = Int16(muertosTF.text!)!
         auxilio?.vehiculo = (vehiculoTF.text)!
@@ -125,7 +228,7 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         if let imageVC = segue.destination as? ImageViewController {
             poblarAuxilio()
             imageVC.auxilio = auxilio
-            //print("descripcion: \(auxilio.descripcion)")
+            print("descripcion antes de enviar: \(auxilio?.descripcion)")
             if listaImage != nil{
                 imageVC.listaImage = listaImage!
             }
@@ -140,10 +243,10 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
                 var managedObjectContext: NSManagedObjectContext!
                 var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 managedObjectContext = appDelegate.persistentContainer.viewContext
-            
+            /*
                 let entityAuxvial = NSEntityDescription.entity(forEntityName: "Auxvial", in: managedObjectContext)!
                 auxilio = Auxvial(entity: entityAuxvial, insertInto: managedObjectContext)
-                
+                */
                 poblarAuxilio()
                 
                 try managedObjectContext.save()
@@ -335,6 +438,9 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         if pickerView == tipoPickerView{
             if pickerDataTipo.count > 0{
                 tipo = pickerDataTipo[row]
+                loadTipoEsp(papa: tipo!)
+                print("tipo?.nombre: \(tipo?.nombre)")
+                print("tipo?.idTipo: \(tipo?.idTipo)")
             }
         }
         if pickerView == tipoEspPickerView{
@@ -366,48 +472,7 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        idEntidadFederativaUsuario = sincronizador.getIdEntidadFederativa() as NSNumber
-        // Do any additional setup after loading the view.
-        loadEntidades()
-        loadClase()
-        loadLado()
-        loadOrienVisib()
-        loadCuerpo()
-        
-        locationMannager.delegate = self
-        locationMannager.desiredAccuracy = kCLLocationAccuracyBest
-        locationMannager.requestWhenInUseAuthorization()
-        let authorizationStatus = CLLocationManager.authorizationStatus()
-        
-        locationMannager.startUpdatingLocation()
-        
-        testFaster()
-    }
     
-    func testFaster(){
-        descripcionTF.text = "Choque"
-        kmInicialTF.text = "0.0"
-        kmFinalTF.text = "0.0"
-        informacionTF.text = "información"
-        lesionadosTF.text = "1"
-        muertosTF.text = "0"
-        vehiculoTF.text = "Camioneta Ford"
-        vehiculosInvolucradosTF.text = "3"
-        danioCaminoTF.text = "Asfalto"
-        vialidadTF.text = "Fabian De Ita"
-        respuestaTF.text = "11:22 horas"
-        actuacionesTF.text = "Gruas y señalamiento"
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //print("lat: ", locations[0].coordinate.latitude, " long: ", locations[0].coordinate.longitude, " Alt: ", locations[0].altitude)
-        latitudTF.text = locations[0].coordinate.latitude.description
-        longitudTF.text = locations[0].coordinate.longitude.description
-        altitudTF.text = locations[0].altitude.description
-    }
     
     func loadSubTipo(papa clase:Clase){
         pickerDataSubTipo.removeAll()
@@ -421,10 +486,16 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             subTipo = sortedSubTipoArray![0]
             for subTipoTemp in sortedSubTipoArray!{
                 pickerDataSubTipo.append(subTipoTemp)
+                if(auxilio != nil){
+                    if(subTipoTemp.idSubtipo == auxilio?.idSubtipo){
+                        subTipo = subTipoTemp
+                    }
+                }
             }
             //pickerData.sort()
             self.subTipoPickerView.delegate = self
             self.subTipoPickerView.dataSource = self
+            self.subTipoPickerView.selectRow((sortedSubTipoArray?.index(of: subTipo!))!, inComponent: 0, animated: true)
         }
     }
     
@@ -439,10 +510,17 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             orienVisib = sortedOrienVisibsArray![0]
             for orienTemp in sortedOrienVisibsArray!{
                 pickerDataOrienVisib.append(orienTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idOrienVisible == orienTemp.idOrienVisib){
+                        orienVisib = orienTemp
+                    }
+                }
+                
             }
             //pickerData.sort()
             self.orienVisibPickerView.delegate = self
             self.orienVisibPickerView.dataSource = self
+            self.orienVisibPickerView.selectRow((sortedOrienVisibsArray?.index(of: orienVisib!))!, inComponent: 0, animated: true)
         }
     }
     
@@ -454,13 +532,20 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             let sortedLadoArray = lados?.sorted(by: { (Lado , Lado2) -> Bool in
                 return Lado.nombre! < Lado2.nombre!
             })
-            lado = sortedLadoArray![0]
+            lado  = sortedLadoArray![0]
             for LadoTemp in sortedLadoArray!{
                 pickerDataLado.append(LadoTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idLado == LadoTemp.idLado){
+                        lado = LadoTemp
+                    }
+                }
             }
             //pickerData.sort()
             self.ladoPickerView.delegate = self
             self.ladoPickerView.dataSource = self
+            print("Lado: \((sortedLadoArray?.index(of: lado!))!)")
+            self.ladoPickerView.selectRow((sortedLadoArray?.index(of: lado!))!, inComponent: 0, animated: true)
         }
     }
     
@@ -475,10 +560,16 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             cuerpo = sortedCuerpoArray![0]
             for cuerpoTemp in sortedCuerpoArray!{
                 pickerDataCuerpo.append(cuerpoTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idCuerpo == cuerpoTemp.idCuerpo){
+                        cuerpo = cuerpoTemp
+                    }
+                }
             }
             //pickerData.sort()
             self.cuerpoPickerView.delegate = self
             self.cuerpoPickerView.dataSource = self
+            self.cuerpoPickerView.selectRow((sortedCuerpoArray?.index(of: cuerpo!))!, inComponent: 0, animated: true)
         }
     }
     
@@ -490,20 +581,27 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             let sortedClasesArray = clases?.sorted(by: { (clase , clase2) -> Bool in
                 return clase.nombre! < clase2.nombre!
             })
-            clase = sortedClasesArray![0]
-            loadTipo(papa: clase!)
+            clase = sortedClasesArray?[0]
             //cargar tipo
             for claseTemp in sortedClasesArray!{
                 pickerDataClase.append(claseTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idClase == claseTemp.idClase){
+                        clase = claseTemp
+                    }
+                }
             }
+            loadTipo(papa: clase!)
             //pickerData.sort()
             loadSubTipo(papa: clase!)
             self.clasePickerView.delegate = self
             self.clasePickerView.dataSource = self
+            self.clasePickerView.selectRow((sortedClasesArray?.index(of: clase!))!, inComponent: 0, animated: true)
         }
     }
    
     func loadTipo(papa clase:Clase){
+        print("idTipoEsp almacenado: \(auxilio?.idTipoEsp)")
         let tipos = sincronizador.getTiposByClase(clase) as? [Tipo]
         if(tipos == nil){
             present(alert.mostrarAlertaSencilla(titulo : strings.TITULO_ERROR_VALIDACION, mensaje : strings.MENSAJE_SIN_ACCESO_SERVIDOR), animated: true, completion: nil)
@@ -511,14 +609,37 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             let sortedTiposArray = tipos?.sorted(by: { (tipo , tipo2) -> Bool in
                 return tipo.nombre! < tipo2.nombre!
             })
-            tipo = sortedTiposArray![0]
+            if(auxilio != nil){
+                let tiposEspecificos = sincronizador.getTipoEspById(id: (auxilio?.idTipoEsp)!) as? [TipoEsp]
+                tipoEsp = tiposEspecificos?[0]
+                print("Tipo Especifico: \(tipoEsp?.nombre)")
+                print("IdTipo : \(tipoEsp?.tipo)")
+                let tiposTempp = sincronizador.getTipoById(id: (tipoEsp?.tipo)!) as? [Tipo]
+                tipo = tiposTempp?[0]
+                loadTipoEsp(papa: tipo!)
+                print(tipo?.nombre)
+            }else{
+                tipo = sortedTiposArray?[0]
+            }
             for tipoTemp in sortedTiposArray!{
                 pickerDataTipo.append(tipoTemp)
+                if(auxilio != nil){
+                    print("tipoTemp.idTipo: \(tipoTemp.idTipo)")
+                    if(tipoTemp.idTipo == (tipoEsp?.tipo)!){
+                        tipo = tipoTemp
+                    }
+                }
             }
             //pickerData.sort()
-            loadTipoEsp(papa: tipo!)
+            if(auxilio == nil){
+                loadTipoEsp(papa: tipo!)
+            }
+            
             self.tipoPickerView.delegate = self
             self.tipoPickerView.dataSource = self
+            if(tipo != nil){
+                self.tipoPickerView.selectRow((sortedTiposArray?.index(of: tipo!))!, inComponent: 0, animated: true)
+            }
         }
     }
     
@@ -531,13 +652,19 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             let sortedTipoEspArray = tipoEsps?.sorted(by: { (tipoEsp , tipoEsp2) -> Bool in
                 return tipoEsp.nombre! < tipoEsp2.nombre!
             })
-            tipoEsp = sortedTipoEspArray![0]
+            tipoEsp = sortedTipoEspArray?[0]
             for tipoEspTemp in sortedTipoEspArray!{
                 pickerDataTipoEsp.append(tipoEspTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idTipoEsp == tipoEspTemp.idtipoEsp){
+                        tipoEsp = tipoEspTemp
+                    }
+                }
             }
             //pickerData.sort()
             self.tipoEspPickerView.delegate = self
             self.tipoEspPickerView.dataSource = self
+            self.tipoEspPickerView.selectRow((sortedTipoEspArray?.index(of: tipoEsp!))!, inComponent: 0, animated: true)
         }
     }
     
@@ -551,12 +678,23 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
                 return tramo.origen! < tramo2.origen!
             })
             tramo = sortedTramosArray![0]
+            var cont:Int = 0
+            var indexTramoSelected:Int = 0
             for tramoTemp in sortedTramosArray!{
                 pickerDataTramo.append(tramoTemp)
+                if(auxilio != nil){
+                    if(auxilio?.idTramo == tramoTemp.idTramo ){
+                        indexTramoSelected = cont;
+                    }
+                }
+                cont = cont + 1
             }
             //pickerData.sort()
             self.tramoPickerView.delegate = self
             self.tramoPickerView.dataSource = self
+            if(auxilio != nil){
+                self.tramoPickerView.selectRow(indexTramoSelected, inComponent: 0, animated: true)
+            }
         }
     }
     
@@ -576,14 +714,44 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             let sortedCarreterasArray = carreteras?.sorted(by: { (carretera , carretera2) -> Bool in
                 return carretera.idCarretera.int16Value < carretera.idCarretera.int16Value
             })
-            carretera = sortedCarreterasArray![0]
-            for carreteraTemp in sortedCarreterasArray!{
-                pickerDataCarretera.append(carreteraTemp)
-                loadTramos(carreteraTemp)
+            var tramoSelected:Tramo?
+            if(auxilio != nil){
+                tramoSelected = sincronizador.getTramoById((auxilio?.idTramo)!)!
             }
+            
+            carretera = sortedCarreterasArray![0]
+            var index:Int = 0
+            var indexIdCarretera:Int = 0
+            var carreteraTemporal:Carretera?
+            for carreteraTemp in sortedCarreterasArray!{
+                
+                pickerDataCarretera.append(carreteraTemp)
+                
+                if(auxilio != nil){
+                    print(carreteraTemp.idCarretera)
+                    print((tramoSelected?.idCarretera)!)
+                    if (carreteraTemp.idCarretera.int16Value == (tramoSelected?.idCarretera)!.int16Value){
+                        indexIdCarretera = index
+                        carreteraTemporal = carreteraTemp
+                    }
+                }else{
+                    carreteraTemporal = carreteraTemp
+                }
+                index = index + 1
+            }
+            
+            
             //pickerData.sort()
             self.carreteraPickerView.delegate = self
             self.carreteraPickerView.dataSource = self
+            
+            if(auxilio != nil && tramoSelected != nil){
+                self.carreteraPickerView.selectRow(indexIdCarretera,inComponent: 0,  animated: true)
+                loadTramos(carreteraTemporal!)
+            }else{
+                loadTramos(carreteraTemporal!)
+            }
+            
         }
     }
     func loadEntidades(){
@@ -608,8 +776,6 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
             //pickerData.sort()
             self.entidadPickerView.delegate = self
             self.entidadPickerView.dataSource = self
-            print(entidad!.idEntidadFederativa)
-            print(entidad!.idEntidadFederativa as! Int)
             self.entidadPickerView.selectRow(posicion,inComponent: 0,  animated: true)
         }
         loadCarreteras(entidad!)

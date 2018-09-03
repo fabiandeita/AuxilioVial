@@ -24,8 +24,6 @@ class MapVC: UIViewController {
             let location = CLLocationCoordinate2D(
                 latitude: (aux  as! Auxvial).latitud, longitude: (aux  as! Auxvial).longitud
             )
-            
-            
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
             if((aux  as! Auxvial).idClase == 1){

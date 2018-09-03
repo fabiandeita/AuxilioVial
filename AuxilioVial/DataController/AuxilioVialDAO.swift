@@ -170,7 +170,7 @@ class AuxilioVialDAO {
     func getAuxvialByIdAuxvial (_ idAuxvial:Int16) ->[AnyObject]?{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
         // Add Predicate
-        let predicate1 = NSPredicate(format: "idauxvial == %@", NSNumber(value: Int(idAuxvial)))
+        let predicate1 = NSPredicate(format: "idauxvial == \(idAuxvial)")
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1])
 
         
