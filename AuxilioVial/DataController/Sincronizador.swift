@@ -204,13 +204,11 @@ class Sincronizador {
                             JSONSerialization.ReadingOptions.mutableContainers) as! [NSDictionary]
                         //Se le dice a CoreData que se almacenaran Auxvial
                         let auxiliovialEntity = NSEntityDescription.entity(forEntityName: "Auxvial", in: self.managedObjectContext)!
+                        print("Resultados a descargar: \(auxvialesJson.count)")
                         for auxJson in auxvialesJson {
-                            let aux = self.auxvialDAO.getAuxvialByIdAuxvial(auxJson["idauxvial"]! as! Int16) as! [Auxvial]
-                            print(aux.count)
-                            print(aux[0].fechacreacion)
-                            print(aux[0].descripcion)
-                            print(aux[0].danioCamino)
-                            if aux != nil && aux.count == 0{
+                            let aux = self.auxvialDAO.getAuxvialByIcveSer(icveSer: auxJson["idauxvial"]! as! Int16) as! [Auxvial]
+                            	
+                            if aux.count == 0{
                                 //Se genera un Auxvial de Core Data - Auxvial.swift y se rellena con la info del json
                                 let auxilioVial = Auxvial(entity: auxiliovialEntity, insertInto: self.managedObjectContext)
                                 auxilioVial.altitud = auxJson["altitud"]! as! Double
@@ -220,14 +218,17 @@ class Sincronizador {
                                 auxilioVial.fechaConoc = auxJson["fechaConoc"]! as? NSDate
                                 auxilioVial.fechacreacion = auxJson["fechacreacion"]! as? NSDate
                                 auxilioVial.fuenteInf = auxJson["fuenteInf"]! as? String
+                                auxilioVial.icveSer = auxJson["idauxvial"]! as! Int16
+                                auxilioVial.idTipoEsp = auxJson["idTipoEsp"]! as! Int16
+                                let tipoEsp = self.getTipoEspById(id: auxilioVial.idTipoEsp) as? [TipoEsp]
+                                let tipo = self.getTipoById(id: tipoEsp![0].tipo) as? [Tipo]
+                                let clase = self.getClaseByTipo(tipo![0].clase) as? [Clase]
+                                auxilioVial.idClase = clase![0].idClase
                                 auxilioVial.idCuerpo = auxJson["idCuerpo"]! as! Int16
-                                auxilioVial.idClase = auxJson["idClase"]! as! Int16
                                 auxilioVial.idLado = auxJson["idLado"]! as! Int16
                                 auxilioVial.idOrienVisible = auxJson["idOrienVisible"]! as! Int16
                                 auxilioVial.idSubtipo = auxJson["idSubtipo"]! as! Int16
-                                auxilioVial.idTipoEsp = auxJson["idTipoEsp"]! as! Int16
                                 auxilioVial.idTramo = auxJson["idTramo"]! as! Int16
-                                auxilioVial.idauxvial = auxJson["idauxvial"]! as! Int16
                                 auxilioVial.kmFinal = auxJson["kmFinal"]! as? String
                                 auxilioVial.kmInicio = auxJson["kmInicio"]! as? String
                                 auxilioVial.latitud = auxJson["latitud"]! as! Double
@@ -239,6 +240,8 @@ class Sincronizador {
                                 auxilioVial.tiempoRespuesta = auxJson["tiempoRespuesta"]! as? String
                                 auxilioVial.vehiculo = auxJson["vehiculo"]! as? String
                                 auxilioVial.vehiculosInvolucrados = auxJson["vehiculosInvolucrados"]! as? String
+                                auxilioVial.syncSer = true
+                                
                                 //Sincronizado
                                 
                                 // Save the entity
@@ -300,7 +303,7 @@ class Sincronizador {
                             subtipo.idSubtipo = subtipoJson["idsubtipo"]! as! Int16
                             subtipo.nombre = subtipoJson["nombre"]! as! String
                             subtipo.clase = subtipoJson["clase"]! as! Int16
-                            print ("SubTipo: \(subtipo.nombre)")
+                            // ("SubTipo: \(subtipo.nombre)")
                         }
                         // Save
                         do {
@@ -326,7 +329,7 @@ class Sincronizador {
     func descargaTipoEspecifico(_ tipo:Tipo){
         let urlTipos = "\(strings.servidor)\(strings.puerto)\(strings.contexto)\(strings.SERVICE_POST_TIPO_ESPECIFICO)"
         let objetoURL  = URL(string:urlTipos)//Se crea la url del servicio
-        print ("Se descargaran TipoEspecifico")
+        //print ("Se descargaran TipoEspecifico")
         //Se crea el json que contiene la entidad que se enviara para solicitar los tramos, para enviarlo en la peticion
         var jsonRequest = [String:Any]()
         jsonRequest["idtipo"] =  tipo.idTipo
@@ -360,8 +363,8 @@ class Sincronizador {
                             tipoEsp.idtipoEsp = tipoEspecificoJson["idtipoEsp"]! as! Int16
                             tipoEsp.tipo = tipoEspecificoJson["tipo"]! as! Int16
                             tipoEsp.nombre = tipoEspecificoJson["nombre"]! as! String
-                            print ("TipoEsp: \(tipoEsp.nombre)")
-                            print ("tipo: \(tipoEsp.nombre)")
+                            //print ("TipoEsp: \(tipoEsp.nombre)")
+                            //print ("tipo: \(tipoEsp.nombre)")
                         }
                         // Save
                         do {
@@ -419,7 +422,7 @@ class Sincronizador {
                             tipo.clase = tipoJson["clase"]! as! Int16
                             tipo.nombre = tipoJson["nombre"] as! String
                             self.descargaTipoEspecifico(tipo)
-                            print ("Tipo: \(tipo.nombre)")
+                            // ("Tipo: \(tipo.nombre)")
                         }
                         // Save
                         do {
@@ -461,7 +464,7 @@ class Sincronizador {
                         let clase = Clase(entity: claseEntity, insertInto: self.managedObjectContext)
                         clase.idClase = claseJ["idclase"]! as! Int16
                         clase.nombre = claseJ["nombre"]! as? String
-                        print("Clase: \(clase.nombre)")
+                        //print("Clase: \(clase.nombre)")
                         self.descargaTipos(clase)
                         self.descargaSubTipos(clase)
                         exito = true;
@@ -469,7 +472,7 @@ class Sincronizador {
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        print("Clase sincronizados")
+                        //print("Clase sincronizados")
                         UserDefaults.standard.set(true, forKey: "Clase")
                         if(exito){
                             self.inicioVC!.updateProgressView(percent: 0.20)
@@ -517,7 +520,7 @@ class Sincronizador {
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        print("Lados sincronizados")
+                        //print("Lados sincronizados")
                         UserDefaults.standard.set(true, forKey: "Lado")
                         if(resultado){
                             self.inicioVC!.updateProgressView(percent: 0.20)
@@ -563,7 +566,7 @@ class Sincronizador {
                     // Save
                     do {
                         try self.managedObjectContext.save()
-                        print("Termina sincronizacion con cuerpos")
+                        //("Termina sincronizacion con cuerpos")
                         
                         if(exito){
                             self.inicioVC!.updateProgressView(percent: 0.20)
@@ -620,14 +623,14 @@ class Sincronizador {
                         let origenVisible = OrienVisib(entity: origenVisibleEntity, insertInto: self.managedObjectContext)
                         origenVisible.idOrienVisib = origen["orienVisib"]! as! Int16
                         origenVisible.nombre = origen["nombre"]! as! String
-                        print(origenVisible.nombre)
+                        //print(origenVisible.nombre)
                         exito = true
                     }
                     // Save
                     do {
                         try self.managedObjectContext.save()
                         UserDefaults.standard.set(exito, forKey: "OrienVisib")
-                        print("OrienVisib sincronizados")
+                        //print("OrienVisib sincronizados")
                         if(exito){
                             self.inicioVC!.updateProgressView(percent: 0.20)
                             self.descargaLado(controlador, progressView)
@@ -906,6 +909,16 @@ class Sincronizador {
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys
     }
+    
+    func getClaseByTipo (_ claseId:Int16) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Clase")
+        //userFetch.fetchLimit = 1//clase deberia llamarse idClase
+        fetchRequest.predicate = NSPredicate(format: "idClase == \(claseId)" )
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+ 
 
     func getTipoEspByTipo(tipo:Tipo) ->[AnyObject]{
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"TipoEsp")

@@ -52,10 +52,10 @@ class AuxilioVialDAO {
         request.resultType = .dictionaryResultType
         
         let results = try! managedObjectContext.fetch(request)
-        print( "Resultado: \(results.description)" )
+        /*print( "Resultado: \(results.description)" )
         for data in results as! [NSManagedObject] {
             print(data.value(forKey: "username") as! String)
-        }
+        }*/
         
         return 0;
     }
@@ -79,11 +79,11 @@ class AuxilioVialDAO {
         request.resultType = .dictionaryResultType
         
         let results = try! managedObjectContext.fetch(request)
-        print( "Resultado: \(results.description)" )
+        //print( "Resultado: \(results.description)" )
         if(results.count > 0){
             let r = results[0]
             if(results.count > 0){
-                print( "Resultado: \( r.value(forKey: "count"))" )
+                //print( "Resultado: \( r.value(forKey: "count"))" )
                 return r.value(forKey: "count") as! Int16
             }
         }
@@ -172,7 +172,18 @@ class AuxilioVialDAO {
         // Add Predicate
         let predicate1 = NSPredicate(format: "idauxvial == \(idAuxvial)")
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1])
-
+        
+        
+        let entitys = try! managedObjectContext.fetch(fetchRequest)
+        return entitys
+    }
+    
+    func getAuxvialByIcveSer (icveSer:Int16) ->[AnyObject]?{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"Auxvial")
+        // Add Predicate
+        let predicate1 = NSPredicate(format: "icveSer == \(icveSer)")
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1])
+        
         
         let entitys = try! managedObjectContext.fetch(fetchRequest)
         return entitys

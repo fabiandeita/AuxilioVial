@@ -171,7 +171,7 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     
     func poblarAuxilio(){
         if(auxilio == nil){
-            print("auxilio is nil")
+            //print("auxilio is nil")
             
             var managedObjectContext: NSManagedObjectContext!
             var appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -184,9 +184,9 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         auxilio?.idClase = (clase?.idClase)!
         auxilio?.idCuerpo = (cuerpo?.idCuerpo)!
         auxilio?.idTipoEsp = (tipoEsp?.idtipoEsp)!
-        print("tipoEsp?.idtipoEsp almacenado: \(tipoEsp?.idtipoEsp)")
+        /*print("tipoEsp?.idtipoEsp almacenado: \(tipoEsp?.idtipoEsp)")
         print("tipoEsp?.nombre almacenado: \(tipoEsp?.nombre)")
-        print("tipoEsp?.tipo almacenado: \(tipoEsp?.tipo)")
+        print("tipoEsp?.tipo almacenado: \(tipoEsp?.tipo)")*/
         auxilio?.idSubtipo = (subTipo?.idSubtipo)!
         auxilio?.idLado = (lado?.idLado)!
         auxilio?.idTramo = (tramo?.idTramo)!
@@ -198,8 +198,8 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         auxilio?.kmFinal = (kmFinalTF.text)!
         auxilio?.fuenteInf = (informacionTF.text)!
         auxilio?.residenteVial = (vialidadTF.text)!
-        print("lesionadosTF 1: \(String(describing: (lesionadosTF.text)))")
-        print("lesionadosTF 2: \(String(describing: lesionadosTF.text))")
+        /*print("lesionadosTF 1: \(String(describing: (lesionadosTF.text)))")
+        print("lesionadosTF 2: \(String(describing: lesionadosTF.text))")*/
         auxilio?.lesionados = Int16(lesionadosTF.text!)!
         auxilio?.muertos = Int16(muertosTF.text!)!
         auxilio?.vehiculo = (vehiculoTF.text)!
@@ -212,7 +212,9 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
         auxilio?.latitud = Double((latitudTF.text)!)!
         auxilio?.longitud = Double((longitudTF.text)!)!
         
-        
+        if(auxilio?.idauxvial == nil || (auxilio?.idauxvial)! > 0){
+            auxilio?.syncSer = false
+        }
     }
     
     @IBAction func regresar(_ sender: Any) {
@@ -220,15 +222,17 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
     }
     
     @IBAction func addImage(_ sender: Any) {
+        
         self.performSegue(withIdentifier: "captacionToImagenesSegue", sender: auxilio)
-        //prepare(for:   "ImagenesToCaptacionSegue", sender: listaImage)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let imageVC = segue.destination as? ImageViewController {
             poblarAuxilio()
-            imageVC.auxilio = auxilio
-            print("descripcion antes de enviar: \(auxilio?.descripcion)")
+            imageVC.altaVC = self
+            //imageVC.auxilio = auxilio
+            //print("descripcion antes de enviar: \(auxilio?.descripcion)")
             if listaImage != nil{
                 imageVC.listaImage = listaImage!
             }
@@ -260,8 +264,8 @@ class AltaVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UI
                 }
                 present(alert.mostrarAlertaInserccion(titulo : strings.TITULO_REGISTRO_EXITOSO, mensaje : strings.MSG_EXITO_ALTA, alta: self), animated: true, completion: nil)
                 
-                print("Auxvial insertado")
-                print("ID Asignado: \(auxilio?.idauxvial)"  )
+                /*print("Auxvial insertado")
+                print("ID Asignado: \(auxilio?.idauxvial)"  )*/
             } catch {
                 fatalError("Failure to save context in Auxvial, with error: \(error)")
             }

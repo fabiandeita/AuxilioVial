@@ -23,7 +23,7 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
         inicializaDatePickers()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.backgroundView = UIImageView(image: UIImage(named: "1.jpg"))
         //incidentesUISwitch.setOn(false, animated: true)
         //accidentesUISwitch.setOn(false, animated: true)
         
@@ -41,6 +41,7 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print()
         let aux = listaAux![indexPath[1]] as! Auxvial
+        self.performSegue(withIdentifier: "detailSegue", sender: aux)
         print(aux.latitud)
     }
     
@@ -53,10 +54,17 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }else{
             cell.imageView!.image = UIImage(named: "accidente")
         }
-        cell
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.minimumScaleFactor = 0.9
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 11.0)
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailVC = segue.destination as? DetailVC {
+            detailVC.auxilio = sender as? Auxvial
+        }
+    }
     
     @IBAction func Busqueda(_ sender: Any) {
         
@@ -89,7 +97,10 @@ class Consulta: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func verMapa(_ sender: Any) {
+        self.performSegue(withIdentifier: "mapSegue", sender: self.listaAux)
     }
+    
+    
     
     func inicializaDatePickers(){
         formatter = DateFormatter()

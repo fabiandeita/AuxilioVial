@@ -50,11 +50,11 @@ class SincronizadorVC: UIViewController {
     }
     
     func cargaEstadisticas(){
-        for auxilio in (auxVialDAO.getAuxiliovial()  as? [Auxvial])!{
+        /*for auxilio in (auxVialDAO.getAuxiliovial()  as? [Auxvial])!{
             print(auxilio.kmInicio)
             print("Imagenes: \(auxilio.image?.count)")
             
-        }
+        }*/
         
         incSincronizadas = auxVialDAO.findAuxvial(true,1)!;
         incPorSinc = auxVialDAO.findAuxvial(false,1)!;

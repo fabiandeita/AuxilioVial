@@ -55,6 +55,7 @@
 		1FCB10D82107E99800780367 /* Clase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D62107E99800780367 /* Clase.swift */; };
 		1FCB10D92107E99800780367 /* Clase+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10D72107E99800780367 /* Clase+CoreDataProperties.swift */; };
 		1FCB10DB210CFFE000780367 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB10DA210CFFE000780367 /* MapVC.swift */; };
+		1FEC6482214849D900155104 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC6481214849D900155104 /* DetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		1FCB10D62107E99800780367 /* Clase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clase.swift; sourceTree = "<group>"; };
 		1FCB10D72107E99800780367 /* Clase+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Clase+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FCB10DA210CFFE000780367 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		1FEC6481214849D900155104 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				1CA8A1CC2060555F00711EEA /* Consulta.swift */,
 				1FC3555C20979B22002BE8CE /* InicioVC.swift */,
 				1FCB10DA210CFFE000780367 /* MapVC.swift */,
+				1FEC6481214849D900155104 /* DetailVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				1CE6CBC3201013220072EA1B /* Alert.swift in Sources */,
 				1CE6CBDF2012F7840072EA1B /* Lado+CoreDataProperties.swift in Sources */,
 				1FCB10D92107E99800780367 /* Clase+CoreDataProperties.swift in Sources */,
+				1FEC6482214849D900155104 /* DetailVC.swift in Sources */,
 				1FCB10DB210CFFE000780367 /* MapVC.swift in Sources */,
 				1FCB10D52107E8CF00780367 /* Tipo+CoreDataProperties.swift in Sources */,
 				1CE6CBE52012F7840072EA1B /* Cuerpo+CoreDataProperties.swift in Sources */,

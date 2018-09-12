@@ -16,8 +16,7 @@ import MobileCoreServices
     private let imagePicker = UIImagePickerController()
     @IBOutlet weak var imageView: UIImageView!
     var listaImage: Array<UIImage> = []
-    var auxilio : Auxvial?
-    
+    var altaVC :AltaVC?
     override var prefersStatusBarHidden: Bool{
         return true;
     }
@@ -27,7 +26,6 @@ import MobileCoreServices
         deleteImageBtn.isHidden = true
         collectionView.dataSource = self
         collectionView.delegate = self
-        
     }
     
     @IBAction func regresarUIButton(_ sender: Any) {
@@ -36,10 +34,13 @@ import MobileCoreServices
         //prepare(for:   "ImagenesToCaptacionSegue", sender: listaImage)
     }
     
+    @IBAction func onBackPressed(){
+        altaVC!.listaImage = listaImage
+        dismiss(animated: true, completion: nil)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let AltaVC = segue.destination as? AltaVC {
             AltaVC.listaImage = listaImage
-            AltaVC.auxilio = auxilio
         }
     }
     
